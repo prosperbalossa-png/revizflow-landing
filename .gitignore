@@ -1,0 +1,20 @@
+# Archives et fichiers temporaires
+*.zip
+*.tar.gz
+*.rar
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE et éditeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environnement et logs (au cas où)
+.env
+.env.*
+*.log

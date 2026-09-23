@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta name="description" content="RevizFlow - La plateforme tout-en-un de productivité étudiante intelligente. Répétition espacée, timer Pomodoro adaptatif, fiches IA et rétroplanning."/>
+  <title>RevizFlow - Productivité Étudiante Intelligente & Révisions IA</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#f8f9ff",
+            "surface-dim": "#cbdbf5",
+            "surface-bright": "#f8f9ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#eff4ff",
+            "surface-container": "#e5eeff",
+            "surface-container-high": "#dce9ff",
+            "surface-container-highest": "#d3e4fe",
+            "on-surface": "#0b1c30",
+            "on-surface-variant": "#3c4a42",
+            "inverse-surface": "#213145",
+            "inverse-on-surface": "#eaf1ff",
+            "outline": "#6c7a71",
+            "outline-variant": "#bbcabf",
+            "surface-tint": "#006c49",
+            "primary": "#006c49",
+            "on-primary": "#ffffff",
+            "primary-container": "#10b981",
+            "on-primary-container": "#00422b",
+            "inverse-primary": "#4edea3",
+            "secondary": "#006c4e",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#80f9c8",
+            "on-secondary-container": "#007353",
+            "tertiary": "#565e74",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#9ba2bb",
+            "on-tertiary-container": "#31394d",
+            "error": "#ba1a1a",
+            "on-error": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-error-container": "#93000a",
+            "primary-fixed": "#6ffbbe",
+            "primary-fixed-dim": "#4edea3",
+            "on-primary-fixed": "#002113",
+            "on-primary-fixed-variant": "#005236",
+            "secondary-fixed": "#80f9c8",
+            "secondary-fixed-dim": "#62dcad",
+            "on-secondary-fixed": "#002115",
+            "on-secondary-fixed-variant": "#00513a",
+            "tertiary-fixed": "#dae2fd",
+            "tertiary-fixed-dim": "#bec6e0",
+            "on-tertiary-fixed": "#131b2e",
+            "on-tertiary-fixed-variant": "#3f465c",
+            "background": "#f8f9ff",
+            "on-background": "#0b1c30",
+            "surface-variant": "#d3e4fe"
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "sm": "0.25rem",
+            "md": "0.75rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "2xl": "1.75rem",
+            "3xl": "2rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem",
+            "gutter": "1.25rem",
+            "gutter-mobile": "0.75rem",
+            "margin": "2rem",
+            "margin-mobile": "1rem"
+          },
+          fontFamily: {
+            sans: ["'Plus Jakarta Sans'", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .bento-glow {
+      box-shadow: 0 4px 20px -2px rgba(16, 185, 129, 0.06), 0 1px 3px rgba(15, 23, 42, 0.03);
+    }
+    .bento-glow:hover {
+      box-shadow: 0 12px 28px -4px rgba(16, 185, 129, 0.12), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f8f9ff;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #bbcabf;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #006c49;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+
+  <!-- ======================= HEADER / NAVBAR ======================= -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-xl border-b border-surface-container/80 transition-all duration-300">
+    <!-- Top Announcement Promo Bar -->
+    <div class="bg-gradient-to-r from-[#004d34] via-primary to-emerald-700 text-white py-1.5 px-4 text-xs font-semibold flex items-center justify-center gap-2 sm:gap-3 text-center border-b border-emerald-600/30">
+      <div class="inline-flex items-center gap-1.5 font-bold">
+        <span class="material-symbols-outlined text-[15px] text-yellow-300">redeem</span>
+        <span>Offre Spéciale : 14 jours d'accès 100% gratuit avec le code</span>
+      </div>
+      <button onclick="copyPromoCode('ACCES26', event)" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/20 hover:bg-white/30 text-white font-mono font-extrabold text-[11px] tracking-wider border border-white/40 border-dashed transition-all hover:scale-105 active:scale-95 shadow-sm" title="Cliquez pour copier le code promo ACCES26">
+        <span id="top-promo-code">ACCES26</span>
+        <span id="top-promo-icon" class="material-symbols-outlined text-[12px]">content_copy</span>
+      </button>
+      <span class="hidden md:inline-block text-emerald-200 text-[11px] font-medium">• 100% de réduction immédiate</span>
+    </div>
+
+    <div class="h-16 sm:h-20 max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-2.5 group focus:outline-none">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-primary-container flex items-center justify-center text-white shadow-[0_2px_10px_rgba(16,185,129,0.3)] group-hover:scale-105 transition-transform">
+          <span class="material-symbols-outlined text-[24px]">cyclone</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl font-bold tracking-tight text-on-surface flex items-center gap-1">
+            RevizFlow
+            <span class="text-[10px] uppercase font-extrabold px-1.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container tracking-wider">IA</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-1 p-1.5 bg-surface-container-low/70 rounded-full border border-surface-container">
+        <a href="#outils" class="px-4 py-1.5 rounded-full text-xs font-semibold text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">Fonctionnalités</a>
+        <a href="#demo-pomodoro" class="px-4 py-1.5 rounded-full text-xs font-semibold text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">Pomodoro Flow</a>
+        <a href="#demo-flashcards" class="px-4 py-1.5 rounded-full text-xs font-semibold text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">Flashcards SM-2</a>
+        <a href="#tarifs" class="px-4 py-1.5 rounded-full text-xs font-semibold text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">Tarifs</a>
+        <a href="#temoignages" class="px-4 py-1.5 rounded-full text-xs font-semibold text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">Avis</a>
+        <a href="#faq" class="px-4 py-1.5 rounded-full text-xs font-semibold text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">FAQ</a>
+      </nav>
+
+      <!-- CTA Buttons -->
+      <div class="flex items-center gap-3">
+        <button onclick="openModal('login-modal')" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-bold text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-full transition-colors">
+          Connexion
+        </button>
+        <button onclick="openModal('signup-modal')" class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 bg-primary-container text-white hover:bg-primary font-bold text-xs rounded-full shadow-[0_4px_14px_rgba(16,185,129,0.3)] hover:shadow-[0_6px_20px_rgba(16,185,129,0.4)] hover:-translate-y-0.5 transition-all">
+          <span>14 jours gratuits</span>
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </button>
+        
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl text-on-surface hover:bg-surface-container-low transition-colors" aria-label="Menu">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden bg-surface-container-lowest border-b border-surface-container px-6 py-4 flex flex-col gap-3 shadow-xl">
+      <a href="#outils" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-on-surface-variant hover:text-primary">Fonctionnalités</a>
+      <a href="#demo-pomodoro" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-on-surface-variant hover:text-primary">Minuteur Pomodoro Flow</a>
+      <a href="#demo-flashcards" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-on-surface-variant hover:text-primary">Flashcards SM-2</a>
+      <a href="#tarifs" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-on-surface-variant hover:text-primary">Tarifs</a>
+      <a href="#temoignages" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-on-surface-variant hover:text-primary">Témoignages</a>
+      <a href="#faq" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-on-surface-variant hover:text-primary">FAQ</a>
+      <div class="pt-2 border-t border-surface-container flex flex-col gap-2">
+        <button onclick="toggleMobileMenu(); openModal('login-modal')" class="w-full py-2.5 rounded-full border border-surface-container text-xs font-bold text-on-surface">Se connecter</button>
+        <button onclick="toggleMobileMenu(); openModal('signup-modal')" class="w-full py-2.5 rounded-full bg-primary-container text-white text-xs font-bold shadow-md">Essai Gratuit 14 Jours (Code ACCES26)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full pt-28 sm:pt-32">
+    
+    <!-- Ambient Top Gradient Glows -->
+    <div class="relative w-full overflow-hidden pointer-events-none">
+      <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[420px] bg-gradient-to-tr from-primary-fixed-dim/25 via-primary-container/20 to-transparent rounded-full blur-3xl -z-10"></div>
+      <div class="absolute top-48 right-10 w-[380px] h-[380px] bg-secondary-container/30 rounded-full blur-3xl -z-10"></div>
+      <div class="absolute top-72 left-8 w-[320px] h-[320px] bg-tertiary-fixed/30 rounded-full blur-3xl -z-10"></div>
+    </div>
+
+    <!-- ======================= 1. HERO SECTION ======================= -->
+    <section class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16 lg:pb-24">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        
+        <!-- Hero Text & CTA Content (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col items-start gap-5">
+          
+          <!-- Announcement Pill -->
+          <div class="inline-flex flex-wrap sm:flex-nowrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50/90 border border-emerald-300 shadow-sm hover:shadow-md transition-all">
+            <span class="relative flex h-2.5 w-2.5 shrink-0">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary-container"></span>
+            </span>
+            <span class="text-[10px] uppercase tracking-wider text-primary font-extrabold bg-emerald-200/80 px-2 py-0.5 rounded-full">Offre Spéciale -100%</span>
+            <span class="text-xs font-semibold text-on-surface">14 jours gratuits avec</span>
+            <button onclick="copyPromoCode('ACCES26', event)" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-emerald-700 hover:bg-emerald-800 text-white font-mono font-bold text-xs tracking-wider border border-dashed border-emerald-300 shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer" title="Cliquer pour copier le code promo ACCES26">
+              <span id="hero-promo-code">ACCES26</span>
+              <span id="hero-promo-icon" class="material-symbols-outlined text-[13px]">content_copy</span>
+            </button>
+          </div>
+
+          <!-- Headline -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-on-surface tracking-tight leading-[1.15] max-w-2xl">
+            Entrez dans <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-container to-secondary-fixed-dim">le Flow</span> d'étude absolu.
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="text-base sm:text-lg text-on-surface-variant max-w-xl leading-relaxed">
+            La plateforme tout-en-un conçue pour réviser sans stress, mémoriser 2x plus vite et débloquer une concentration maximale grâce aux neurosciences actives.
+          </p>
+
+          <!-- Action CTAs -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full sm:w-auto pt-2">
+            <button onclick="openModal('signup-modal')" class="inline-flex items-center justify-center gap-2 px-7 py-4 bg-primary-container hover:bg-primary text-white font-bold text-sm rounded-full shadow-[0_10px_25px_-5px_rgba(16,185,129,0.35)] hover:shadow-[0_14px_30px_-5px_rgba(16,185,129,0.45)] hover:-translate-y-0.5 transition-all group">
+              <span>Essayer 14 jours avec ACCES26</span>
+              <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </button>
+            <a href="#outils" class="inline-flex items-center justify-center gap-2 px-6 py-4 bg-surface-container-lowest text-on-surface font-bold text-sm rounded-full shadow-[0_4px_20px_-2px_rgba(16,185,129,0.08)] border border-surface-container hover:bg-surface-container-low transition-all">
+              <span class="material-symbols-outlined text-[20px] text-primary" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+              <span>Tester la démo interactive</span>
+            </a>
+          </div>
+
+          <!-- Micro commitment text -->
+          <p class="text-xs text-tertiary flex items-center gap-1.5 -mt-1 font-medium">
+            <span class="material-symbols-outlined text-[16px] text-primary-container">check_circle</span>
+            14 jours 100% gratuits avec le code <strong class="text-primary font-mono font-bold">ACCES26</strong> • Sans engagement • Annulation en 1 clic
+          </p>
+
+          <!-- Social Proof Snippet -->
+          <div class="flex flex-wrap items-center gap-4 pt-4 mt-2 border-t border-surface-container/80 w-full">
+            <div class="flex -space-x-2.5 overflow-hidden">
+              <div class="inline-flex h-10 w-10 rounded-full bg-emerald-100 ring-2 ring-white items-center justify-center text-primary font-bold text-xs">SL</div>
+              <div class="inline-flex h-10 w-10 rounded-full bg-teal-100 ring-2 ring-white items-center justify-center text-teal-800 font-bold text-xs">MD</div>
+              <div class="inline-flex h-10 w-10 rounded-full bg-emerald-200 ring-2 ring-white items-center justify-center text-emerald-950 font-bold text-xs">TC</div>
+              <div class="inline-flex h-10 w-10 rounded-full bg-slate-200 ring-2 ring-white items-center justify-center text-slate-800 font-bold text-xs">AL</div>
+            </div>
+            <div class="flex flex-col">
+              <div class="flex items-center gap-1 text-amber-500">
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="text-xs text-on-surface font-extrabold ml-1">4.9/5</span>
+              </div>
+              <p class="text-xs text-on-surface-variant font-medium">
+                Rejoint par <span class="text-on-surface font-bold">+25 000 étudiants</span> (Médecine, Prépa, Droit, Ingé)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual Showcase / Mascot & Bento Card (5 cols) -->
+        <div class="lg:col-span-5 relative mt-6 lg:mt-0">
+          <div class="relative bg-surface-container-lowest rounded-3xl p-4 shadow-[0_20px_50px_-15px_rgba(16,185,129,0.18)] border border-surface-container">
+            
+            <!-- Hero Mascot / Interactive Study Hub Showcase -->
+            <div class="relative rounded-2xl overflow-hidden aspect-square bg-gradient-to-br from-surface-container-low via-surface-container to-secondary-container/20 flex flex-col justify-between p-6">
+              
+              <!-- Mini Header in Visual -->
+              <div class="flex items-center justify-between z-10">
+                <div class="flex items-center gap-2 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span class="text-xs font-bold text-on-surface">Espace de Travail Actif</span>
+                </div>
+                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary-container text-white shadow-sm">Niveau 14 • Flow Master</span>
+              </div>
+
+              <!-- Central Mascot Graphic / Concept -->
+              <div class="flex flex-col items-center justify-center my-auto text-center z-10">
+                <div class="w-28 h-28 rounded-full bg-gradient-to-tr from-primary to-primary-container flex items-center justify-center text-white shadow-2xl mb-4 group hover:scale-105 transition-transform">
+                  <span class="material-symbols-outlined text-[56px] animate-bounce" style="animation-duration: 3s;">self_improvement</span>
+                </div>
+                <h4 class="text-xl font-bold text-on-surface">Concentration Maximale</h4>
+                <p class="text-xs text-on-surface-variant mt-1 max-w-[240px]">Neuro-optimisation & répétition espacée synchronisées</p>
+              </div>
+
+              <!-- Mini Progress Bar inside -->
+              <div class="z-10 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-sm">
+                <div class="flex justify-between items-center text-xs mb-1.5">
+                  <span class="font-bold text-on-surface">Objectif du jour (Session Concours)</span>
+                  <span class="font-bold text-primary">85% complété</span>
+                </div>
+                <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                  <div class="bg-gradient-to-r from-primary to-primary-container h-full rounded-full w-[85%] transition-all duration-1000"></div>
+                </div>
+              </div>
+
+              <!-- Ambient glow inside visual -->
+              <div class="absolute inset-0 bg-gradient-to-t from-emerald-500/10 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+
+            <!-- Floating Badge Top Right: Retention Rate -->
+            <div class="absolute -top-4 -right-4 bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl p-3.5 shadow-[0_12px_30px_rgba(0,108,73,0.15)] border border-surface-container flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container">
+                <span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">psychology</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xl font-extrabold text-on-surface leading-tight">98%</span>
+                <span class="text-[11px] font-semibold text-tertiary">Taux de mémorisation</span>
+              </div>
+            </div>
+
+            <!-- Floating Badge Bottom Left: Active Session Timer -->
+            <div class="absolute -bottom-4 -left-4 bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl p-3.5 shadow-[0_14px_35px_rgba(0,0,0,0.1)] border border-surface-container flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl bg-primary-container text-white flex items-center justify-center animate-pulse">
+                <span class="material-symbols-outlined text-[22px]">timer</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                  <span class="text-[10px] text-primary font-extrabold uppercase tracking-wider">Session Active</span>
+                </div>
+                <p class="text-sm font-bold text-on-surface">2h 45m de Flow pur</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================= 2. LOGO CLOUD / UNIVERSITIES ======================= -->
+    <section class="w-full bg-surface-container-low/50 py-10 border-y border-surface-container/60">
+      <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-xs uppercase tracking-widest text-tertiary font-extrabold mb-6">
+          Adopté par des étudiants des écoles et universités les plus exigeantes
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-12 lg:gap-16 opacity-80">
+          <span class="text-base sm:text-lg font-bold tracking-tight text-on-surface-variant hover:text-primary transition-colors cursor-default">Sorbonne Université</span>
+          <span class="text-base sm:text-lg font-bold tracking-tight text-on-surface-variant hover:text-primary transition-colors cursor-default">Sciences Po</span>
+          <span class="text-base sm:text-lg font-bold tracking-tight text-on-surface-variant hover:text-primary transition-colors cursor-default">École Polytechnique</span>
+          <span class="text-base sm:text-lg font-bold tracking-tight text-on-surface-variant hover:text-primary transition-colors cursor-default">HEC Paris</span>
+          <span class="text-base sm:text-lg font-bold tracking-tight text-on-surface-variant hover:text-primary transition-colors cursor-default">EPFL Lausanne</span>
+          <span class="text-base sm:text-lg font-bold tracking-tight text-on-surface-variant hover:text-primary transition-colors cursor-default">Université Paris Cité</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= 3. FEATURE GRID / BENTO SECTION ======================= -->
+    <section class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full" id="outils">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-secondary-container/60 text-on-secondary-container text-xs uppercase tracking-wider font-extrabold mb-3">
+          <span class="material-symbols-outlined text-[16px]">auto_awesome</span>
+          Outils d'Étude Intégrés
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-on-surface tracking-tight">
+          Tout pour réviser avec sérénité, rigueur et méthode
+        </h2>
+        <p class="text-base text-on-surface-variant mt-3 max-w-2xl leading-relaxed">
+          Chaque outil a été conçu selon les principes des sciences cognitives pour réduire la charge mentale et maximiser la consolidation mnésique.
+        </p>
+      </div>
+
+      <!-- Bento Grid Container -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+        
+        <!-- Card 1: Pomodoro Adaptatif (7 cols) - Interactive Widget -->
+        <div id="demo-pomodoro" class="lg:col-span-7 bg-surface-container-lowest rounded-3xl p-6 sm:p-8 bento-glow border border-surface-container flex flex-col justify-between transition-all">
+          <div>
+            <div class="flex items-start justify-between gap-4 mb-4">
+              <div>
+                <span class="text-[11px] text-primary font-extrabold uppercase tracking-wider">Neuro-Concentration</span>
+                <h3 class="text-2xl font-bold text-on-surface mt-1">Timer Pomodoro Adaptatif & Ambiance Flow</h3>
+                <p class="text-sm text-on-surface-variant mt-1.5">
+                  Ajuste automatiquement vos cycles selon votre niveau d'énergie et intègre des ondes sonores scientifiquement éprouvées.
+                </p>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold whitespace-nowrap">Interactif</span>
+            </div>
+
+            <!-- Interactive Mockup Pomodoro -->
+            <div class="bg-surface-container-low/70 rounded-2xl p-5 sm:p-6 border border-surface-container flex flex-col sm:flex-row items-center justify-between gap-6 my-3">
+              
+              <!-- Circular Timer Graphic with Controls -->
+              <div class="relative w-44 h-44 flex items-center justify-center shrink-0">
+                <svg class="w-full h-full -rotate-90" viewBox="0 0 120 120">
+                  <circle class="text-surface-container-highest" cx="60" cy="60" fill="transparent" r="52" stroke="currentColor" stroke-width="8"></circle>
+                  <circle id="pomodoro-circle" class="text-primary-container transition-all duration-1000" cx="60" cy="60" fill="transparent" r="52" stroke="currentColor" stroke-dasharray="326" stroke-dashoffset="0" stroke-linecap="round" stroke-width="8"></circle>
+                </svg>
+                <div class="absolute flex flex-col items-center justify-center text-center">
+                  <span id="timer-display" class="text-3xl font-extrabold text-on-surface tabular-nums tracking-tight">25:00</span>
+                  <span id="timer-label" class="text-[11px] text-primary font-bold uppercase mt-0.5">Cycle Profond</span>
+                  
+                  <!-- Play / Reset mini buttons -->
+                  <div class="flex items-center gap-1.5 mt-2">
+                    <button id="timer-toggle-btn" onclick="togglePomodoro()" class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center shadow-md hover:bg-primary transition-all" title="Démarrer/Pause">
+                      <span id="timer-btn-icon" class="material-symbols-outlined text-[18px]">play_arrow</span>
+                    </button>
+                    <button onclick="resetPomodoro()" class="w-8 h-8 rounded-full bg-surface-container text-on-surface flex items-center justify-center hover:bg-surface-container-high transition-all" title="Réinitialiser">
+                      <span class="material-symbols-outlined text-[16px]">restart_alt</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Soundscapes & Controls with Live Web Audio Synthesis -->
+              <div class="flex flex-col gap-2.5 w-full">
+                <span class="text-[11px] text-tertiary uppercase font-extrabold tracking-wider">Générateur d'Ondes & Sons Ambiants</span>
+                
+                <!-- Sound Option 1: Soft Rain -->
+                <button onclick="toggleAudio('rain')" id="sound-rain-btn" class="w-full text-left flex items-center justify-between p-3 bg-surface-container-lowest hover:bg-emerald-50/50 rounded-xl border border-surface-container shadow-sm transition-all group">
+                  <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-[22px] text-primary group-hover:scale-110 transition-transform">rainy</span>
+                    <div>
+                      <span class="text-xs font-bold text-on-surface block">Pluie douce sur verrière</span>
+                      <span class="text-[10px] text-tertiary">Bruit rose apaisant</span>
+                    </div>
+                  </div>
+                  <span id="sound-rain-icon" class="material-symbols-outlined text-[20px] text-primary">play_circle</span>
+                </button>
+
+                <!-- Sound Option 2: Alpha Waves -->
+                <button onclick="toggleAudio('alpha')" id="sound-alpha-btn" class="w-full text-left flex items-center justify-between p-3 bg-surface-container-lowest hover:bg-emerald-50/50 rounded-xl border border-surface-container shadow-sm transition-all group">
+                  <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-[22px] text-emerald-600 group-hover:scale-110 transition-transform">graphic_eq</span>
+                    <div>
+                      <span class="text-xs font-bold text-on-surface block">Ondes Alpha 40Hz (Focus Pur)</span>
+                      <span class="text-[10px] text-tertiary">Fréquence neuronale de flux</span>
+                    </div>
+                  </div>
+                  <span id="sound-alpha-icon" class="material-symbols-outlined text-[20px] text-tertiary">play_circle</span>
+                </button>
+
+                <!-- Sound Option 3: Quiet Study Cafe -->
+                <button onclick="toggleAudio('cafe')" id="sound-cafe-btn" class="w-full text-left flex items-center justify-between p-3 bg-surface-container-lowest hover:bg-emerald-50/50 rounded-xl border border-surface-container shadow-sm transition-all group">
+                  <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-[22px] text-amber-600 group-hover:scale-110 transition-transform">coffee</span>
+                    <div>
+                      <span class="text-xs font-bold text-on-surface block">Café étudiant feutré</span>
+                      <span class="text-[10px] text-tertiary">Ambiance bibliothèque feutrée</span>
+                    </div>
+                  </div>
+                  <span id="sound-cafe-icon" class="material-symbols-outlined text-[20px] text-tertiary">play_circle</span>
+                </button>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between pt-3 gap-2 border-t border-surface-container/60">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary-container text-[20px]">local_fire_department</span>
+              <span class="text-xs font-bold text-on-surface">Série de 7 jours consécutifs</span>
+            </div>
+            <span class="text-xs font-semibold text-tertiary">+35h cumulées cette semaine</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Flashcards & Leitner (5 cols) - Interactive Flip Deck -->
+        <div id="demo-flashcards" class="lg:col-span-5 bg-surface-container-lowest rounded-3xl p-6 sm:p-8 bento-glow border border-surface-container flex flex-col justify-between transition-all">
+          <div>
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <span class="text-[11px] text-primary font-extrabold uppercase tracking-wider">Répétition Espacée</span>
+                <h3 class="text-2xl font-bold text-on-surface mt-1">Flashcards & Algorithme SM-2</h3>
+                <p class="text-sm text-on-surface-variant mt-1">
+                  Les cartes réapparaissent exactement au moment où votre cerveau s'apprête à oublier.
+                </p>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-teal-100 text-teal-800 text-[11px] font-bold">SM-2 IA</span>
+            </div>
+
+            <!-- Flashcard Visual Deck Representation (Interactive Flip) -->
+            <div class="relative my-6 px-2 perspective-1000">
+              
+              <!-- Background cards effect -->
+              <div class="w-[90%] mx-auto h-24 bg-surface-container-high/60 rounded-2xl -mb-20 scale-95 opacity-60"></div>
+              <div class="w-[95%] mx-auto h-24 bg-surface-container rounded-2xl -mb-20 scale-98 opacity-90"></div>
+              
+              <!-- Front / Back Card Container -->
+              <div id="flashcard-element" onclick="flipFlashcard()" class="relative bg-surface-container-lowest rounded-2xl p-5 sm:p-6 shadow-[0_10px_25px_rgba(0,0,0,0.06)] border border-surface-container flex flex-col justify-between min-h-[210px] cursor-pointer hover:border-primary-container transition-all">
+                
+                <!-- Card Header -->
+                <div class="flex items-center justify-between">
+                  <span id="fc-category" class="px-2.5 py-0.5 rounded-full bg-secondary-container/50 text-xs font-bold text-on-secondary-container">
+                    Anatomie • Carte 14/80
+                  </span>
+                  <span id="fc-interval" class="text-xs font-semibold text-tertiary flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px]">history</span> Intervalle: +4j
+                  </span>
+                </div>
+
+                <!-- Card Content (Front / Back) -->
+                <div class="py-4 text-center">
+                  <p id="fc-question" class="text-base sm:text-lg font-bold text-on-surface leading-snug">
+                    Quelles sont les 3 branches principales de la crosse aortique ?
+                  </p>
+                  <p id="fc-answer" class="hidden text-sm sm:text-base font-semibold text-primary mt-2">
+                    1. Tronc brachiocéphalique<br/>2. Artère carotide commune gauche<br/>3. Artère subclavière gauche
+                  </p>
+                  <span class="text-[11px] text-tertiary block mt-2 font-medium">💡 Cliquez sur la carte pour révéler la réponse</span>
+                </div>
+
+                <!-- Rate Difficulty Buttons -->
+                <div class="grid grid-cols-3 gap-2 pt-2 border-t border-surface-container" onclick="event.stopPropagation()">
+                  <button onclick="rateFlashcard('hard')" class="py-1.5 rounded-lg bg-red-50 text-red-700 text-xs font-bold hover:bg-red-100 transition-colors">Difficile (+1j)</button>
+                  <button onclick="rateFlashcard('medium')" class="py-1.5 rounded-lg bg-amber-50 text-amber-700 text-xs font-bold hover:bg-amber-100 transition-colors">Moyen (+4j)</button>
+                  <button onclick="rateFlashcard('easy')" class="py-1.5 rounded-lg bg-emerald-100 text-emerald-800 text-xs font-extrabold hover:bg-emerald-200 transition-colors">Facile (+10j)</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Mini Retention Curve Indicator -->
+          <div class="flex items-center justify-between bg-surface-container-low rounded-xl px-4 py-2.5 border border-surface-container">
+            <span class="text-xs font-semibold text-on-surface">Courbe de l'oubli optimisée</span>
+            <span class="text-xs font-extrabold text-primary">+210% de rétention à long terme</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Planning Partiels IA (4 cols) -->
+        <div class="lg:col-span-4 bg-surface-container-lowest rounded-3xl p-6 bento-glow border border-surface-container flex flex-col justify-between">
+          <div>
+            <div class="w-11 h-11 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container mb-3 shadow-sm">
+              <span class="material-symbols-outlined text-[24px]">calendar_clock</span>
+            </div>
+            <h3 class="text-lg font-bold text-on-surface">Rétroplanning IA des Partiels</h3>
+            <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">
+              Entrez vos dates d'examens : l'IA décompose vos cours en jalons réalistes et équilibrés sans surcharge.
+            </p>
+          </div>
+          
+          <div class="bg-surface-container-low rounded-xl p-3.5 flex flex-col gap-2.5 my-4 border border-surface-container">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-bold text-on-surface">Droit Administratif / PASS</span>
+              <span class="text-primary font-extrabold">Dans 12 jours</span>
+            </div>
+            <div class="w-full bg-surface-container-highest rounded-full h-2.5 overflow-hidden">
+              <div class="bg-primary-container h-full rounded-full w-[78%]"></div>
+            </div>
+            <div class="flex justify-between text-[11px] text-tertiary font-medium">
+              <span>22/28 chapitres validés</span>
+              <span class="text-primary font-bold">78% prêt</span>
+            </div>
+          </div>
+
+          <span class="text-xs text-primary font-bold flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px]">bolt</span> Réajustement dynamique en cas de retard
+          </span>
+        </div>
+
+        <!-- Card 4: Notes & Synthèses Automatiques (4 cols) -->
+        <div class="lg:col-span-4 bg-surface-container-lowest rounded-3xl p-6 bento-glow border border-surface-container flex flex-col justify-between">
+          <div>
+            <div class="w-11 h-11 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-800 mb-3 shadow-sm">
+              <span class="material-symbols-outlined text-[24px]">auto_stories</span>
+            </div>
+            <h3 class="text-lg font-bold text-on-surface">Synthèses & Fiches Instantanées</h3>
+            <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">
+              Glissez vos diaporamas PDF ou cours tapés : obtenez une fiche synthétique hiérarchisée et 30 flashcards générées.
+            </p>
+          </div>
+
+          <div class="bg-surface-container-low rounded-xl p-3.5 flex items-center gap-3 my-4 border border-surface-container">
+            <div class="w-10 h-10 rounded-lg bg-red-100 text-red-700 flex items-center justify-center shadow-sm">
+              <span class="material-symbols-outlined text-[22px]">picture_as_pdf</span>
+            </div>
+            <div class="flex flex-col min-w-0 flex-1">
+              <span class="text-xs font-bold text-on-surface truncate">Biochimie_Metabolisme.pdf</span>
+              <span class="text-[11px] text-tertiary">Fiche générée • 24 cartes créées</span>
+            </div>
+            <span class="material-symbols-outlined text-[20px] text-primary">done_all</span>
+          </div>
+
+          <span class="text-xs text-tertiary font-semibold flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px] text-emerald-600">lock</span> Vos cours restent 100% privés et chiffrés
+          </span>
+        </div>
+
+        <!-- Card 5: Salons Virtuels / Binômes Silencieux (4 cols) -->
+        <div class="lg:col-span-4 bg-surface-container-lowest rounded-3xl p-6 bento-glow border border-surface-container flex flex-col justify-between">
+          <div>
+            <div class="w-11 h-11 rounded-xl bg-slate-100 flex items-center justify-center text-on-surface mb-3 shadow-sm">
+              <span class="material-symbols-outlined text-[24px]">group</span>
+            </div>
+            <h3 class="text-lg font-bold text-on-surface">Salons d'Étude Silencieux</h3>
+            <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">
+              Rejoignez des salons de révision en visio silencieuse (Study With Me) pour vaincre la solitude et rester rigoureux.
+            </p>
+          </div>
+
+          <div class="bg-surface-container-low rounded-xl p-3.5 flex items-center justify-between my-4 border border-surface-container">
+            <div class="flex items-center gap-2.5">
+              <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-primary-container"></span>
+              </span>
+              <span class="text-xs font-bold text-on-surface">Salon “Prépa HEC & Concours”</span>
+            </div>
+            <span class="text-[11px] font-bold text-on-surface-variant bg-surface-container px-2.5 py-1 rounded-md">18 connectés</span>
+          </div>
+
+          <span class="text-xs text-primary font-bold flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px]">military_tech</span> Zéro distraction, 100% émulation positive
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================= 4. STATS & PRODUCTIVITY IMPACT ======================= -->
+    <section class="w-full bg-surface-container-lowest py-16 border-y border-surface-container shadow-sm">
+      <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-surface-container">
+          
+          <div class="flex flex-col items-center pt-4 md:pt-0 md:px-4">
+            <span class="text-5xl lg:text-6xl font-extrabold text-primary tracking-tight">+42%</span>
+            <span class="text-lg font-bold text-on-surface mt-2">D'amélioration aux examens</span>
+            <p class="text-xs sm:text-sm text-on-surface-variant mt-1.5 max-w-xs leading-relaxed">
+              Constaté auprès des étudiants utilisant les cycles de répétition espacée pendant au moins un semestre.
+            </p>
+          </div>
+
+          <div class="flex flex-col items-center pt-4 md:pt-0 md:px-4">
+            <span class="text-5xl lg:text-6xl font-extrabold text-primary-container tracking-tight">3.5x</span>
+            <span class="text-lg font-bold text-on-surface mt-2">Moins de procrastination</span>
+            <p class="text-xs sm:text-sm text-on-surface-variant mt-1.5 max-w-xs leading-relaxed">
+              Grâce au découpage automatisé des tâches et à l'immersion sonore anti-distraction.
+            </p>
+          </div>
+
+          <div class="flex flex-col items-center pt-4 md:pt-0 md:px-4">
+            <span class="text-5xl lg:text-6xl font-extrabold text-emerald-800 tracking-tight">1.2M</span>
+            <span class="text-lg font-bold text-on-surface mt-2">Flashcards validées</span>
+            <p class="text-xs sm:text-sm text-on-surface-variant mt-1.5 max-w-xs leading-relaxed">
+              Révisées et retenues sur le long terme par notre communauté académique active.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= 5. PRICING SECTION / TARIFS EN FCFA ======================= -->
+    <section id="tarifs" class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+      
+      <div class="flex flex-col items-center text-center max-w-2xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-secondary-container/60 text-on-secondary-container text-xs uppercase tracking-wider font-extrabold mb-3">
+          <span class="material-symbols-outlined text-[16px]">payments</span>
+          Tarifs Étudiants en FCFA
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-on-surface tracking-tight">
+          Investissez dans votre réussite, pas dans des outils dispersés
+        </h2>
+        <p class="text-sm text-on-surface-variant mt-2">
+          Des formules adaptées au budget étudiant. Annulable à tout moment en un clic.
+        </p>
+
+        <!-- Billing Toggle (Monthly / Annual) -->
+        <div class="mt-6 inline-flex items-center p-1.5 bg-surface-container rounded-full border border-surface-container-highest">
+          <button id="billing-monthly-btn" onclick="setBilling('monthly')" class="px-5 py-2 rounded-full text-xs font-bold transition-all bg-white text-on-surface shadow-sm">
+            Mensuel
+          </button>
+          <button id="billing-annual-btn" onclick="setBilling('annual')" class="px-5 py-2 rounded-full text-xs font-bold text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-1.5">
+            <span>Annuel</span>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold">-25%</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Promo Highlight Banner ACCES26 -->
+      <div class="mb-10 w-full rounded-3xl bg-gradient-to-r from-emerald-950 via-[#005a3c] to-emerald-900 text-white p-6 sm:p-7 shadow-[0_12px_35px_-8px_rgba(0,108,73,0.35)] border border-emerald-500/30 flex flex-col md:flex-row items-center justify-between gap-5">
+        <div class="flex items-center gap-4 text-center md:text-left">
+          <div class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center shrink-0 text-emerald-200 border border-white/20 shadow-inner">
+            <span class="material-symbols-outlined text-[30px] text-yellow-300">redeem</span>
+          </div>
+          <div>
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-1">
+              <span class="px-2.5 py-0.5 rounded-full bg-emerald-400 text-emerald-950 font-extrabold text-[10px] uppercase tracking-wider">Offre Spéciale Pro</span>
+              <span class="text-xs text-emerald-200 font-semibold">• 100% de réduction immédiate</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-white">
+              Profitez de 14 jours 100% GRATUITS avec le code promo <span class="font-mono text-yellow-300 bg-white/15 px-2.5 py-0.5 rounded border border-dashed border-emerald-300 font-extrabold">ACCES26</span>
+            </h3>
+            <p class="text-xs sm:text-sm text-emerald-100/90 mt-1">
+              Profitez de 14 jours 100% GRATUITS avec le code promo ACCES26 lors du paiement/passage de votre pass Pro Étudiant.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <button onclick="copyPromoCode('ACCES26', event)" class="px-5 py-3 rounded-2xl bg-white hover:bg-emerald-50 text-emerald-950 font-extrabold text-xs flex items-center gap-2 shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer">
+            <span class="material-symbols-outlined text-[18px] text-primary">content_copy</span>
+            <span>Copier le code <span class="font-mono">ACCES26</span></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Pricing Cards Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        
+        <!-- Plan 1: Découverte (0 FCFA) -->
+        <div class="bg-surface-container-lowest rounded-3xl p-8 border border-surface-container bento-glow flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-bold text-on-surface">Découverte</h3>
+              <span class="px-3 py-1 rounded-full bg-surface-container text-tertiary text-xs font-bold">Gratuit à vie</span>
+            </div>
+            <p class="text-xs text-on-surface-variant">Pour poser les bases d'une organisation d'étude rigoureuse.</p>
+            
+            <div class="my-6">
+              <span class="text-4xl font-extrabold text-on-surface">0 FCFA</span>
+              <span class="text-xs text-tertiary font-semibold">/ pour toujours</span>
+            </div>
+
+            <ul class="flex flex-col gap-3 text-xs text-on-surface font-medium border-t border-surface-container pt-6">
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                Jusqu'à 150 flashcards actives
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                Timer Pomodoro standard
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                3 synthèses de cours IA / mois
+              </li>
+              <li class="flex items-center gap-2 text-tertiary line-through">
+                <span class="material-symbols-outlined text-[18px]">cancel</span>
+                Ambiance sonore binaurale illimitée
+              </li>
+            </ul>
+          </div>
+
+          <button onclick="openModal('signup-modal')" class="mt-8 w-full py-3 rounded-full border-2 border-surface-container hover:border-primary text-on-surface font-bold text-xs transition-all">
+            Démarrer Gratuitement
+          </button>
+        </div>
+
+        <!-- Plan 2: Pro Étudiant (1 199 FCFA) - Featured with ACCES26 Promo -->
+        <div class="relative bg-surface-container-lowest rounded-3xl p-8 border-2 border-primary-container shadow-[0_15px_40px_-10px_rgba(16,185,129,0.25)] flex flex-col justify-between scale-105 z-10">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-primary-container text-white text-[11px] font-extrabold uppercase tracking-wider shadow-md flex items-center gap-1.5 whitespace-nowrap">
+            <span class="material-symbols-outlined text-[14px]">local_offer</span>
+            <span>Code ACCES26 : 14j offerts</span>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-bold text-on-surface">Pro Étudiant</h3>
+              <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-extrabold">14j 100% Gratuits</span>
+            </div>
+            <p class="text-xs text-on-surface-variant">L'arsenal complet pour majorer vos partiels et concours.</p>
+            
+            <div class="my-5">
+              <div class="flex items-baseline gap-2">
+                <span id="price-pro" class="text-4xl font-extrabold text-primary">1 199 FCFA</span>
+                <span id="period-pro" class="text-xs text-tertiary font-semibold">/ mois</span>
+              </div>
+              <!-- Promo code applied preview badge -->
+              <div class="mt-3 p-3 rounded-2xl bg-emerald-50/90 border border-dashed border-emerald-300 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-[20px] text-primary">sell</span>
+                  <div class="text-left">
+                    <span class="text-[11px] font-bold text-emerald-950 block">Code promo <code class="font-mono bg-emerald-200/80 px-1 rounded">ACCES26</code></span>
+                    <span class="text-[10px] text-emerald-700 font-semibold">100% de réduction (14 jours offerts)</span>
+                  </div>
+                </div>
+                <span class="text-xs font-mono font-extrabold text-primary bg-white px-2 py-0.5 rounded-lg border border-emerald-200 shadow-sm">0 FCFA</span>
+              </div>
+            </div>
+
+            <ul class="flex flex-col gap-3 text-xs text-on-surface font-medium border-t border-surface-container pt-5">
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                <strong>Flashcards & Algorithme SM-2 illimités</strong>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                <strong>Générateur de fiches & QCM par IA illimité</strong>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                Rétroplanning dynamique anti-retard
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                Toutes les ambiances sonores & ondes alpha
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                Synchronisation ordi + tablette + mobile
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-7 flex flex-col gap-2">
+            <button onclick="openModal('signup-modal')" class="w-full py-3.5 rounded-full bg-primary-container hover:bg-primary text-white font-bold text-xs shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+              <span>Activer mes 14 jours avec ACCES26</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </button>
+            <p class="text-[11px] text-center text-primary font-bold flex items-center justify-center gap-1">
+              <span class="material-symbols-outlined text-[14px]">sell</span>
+              <span>Saisissez <code class="font-mono bg-emerald-100 px-1.5 py-0.5 rounded text-emerald-950 font-extrabold">ACCES26</code> pour obtenir 100% de réduction</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Plan 3: Major & Concours (4 950 FCFA) -->
+        <div class="bg-surface-container-lowest rounded-3xl p-8 border border-surface-container bento-glow flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-bold text-on-surface">Major & Concours</h3>
+              <span class="px-3 py-1 rounded-full bg-surface-container text-on-surface font-bold text-xs">Excellence</span>
+            </div>
+            <p class="text-xs text-on-surface-variant">Pour les étudiants en PASS/LAS, CPGE, Barreau et concours ultra-sélectifs.</p>
+            
+            <div class="my-6">
+              <span id="price-major" class="text-4xl font-extrabold text-on-surface">4 950 FCFA</span>
+              <span id="period-major" class="text-xs text-tertiary font-semibold">/ mois</span>
+            </div>
+
+            <ul class="flex flex-col gap-3 text-xs text-on-surface font-medium border-t border-surface-container pt-6">
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                Tout le forfait Pro Étudiant
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                <strong>Diagnostic mnésique approfondi par IA</strong>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                Salons d'études privés en groupe restreint
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                Support prioritaire 7j/7 en 1h
+              </li>
+            </ul>
+          </div>
+
+          <button onclick="openModal('signup-modal')" class="mt-8 w-full py-3 rounded-full border-2 border-surface-container hover:border-primary text-on-surface font-bold text-xs transition-all">
+            Choisir Major & Concours
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================= 6. TESTIMONIALS / WALL OF LOVE ======================= -->
+    <section id="temoignages" class="w-full bg-surface-container-low/40 py-20 border-t border-surface-container">
+      <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col items-center text-center max-w-2xl mx-auto mb-14">
+          <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-secondary-container/60 text-on-secondary-container text-xs uppercase tracking-wider font-extrabold mb-3">
+            <span class="material-symbols-outlined text-[16px]">reviews</span>
+            Retours d'Expérience
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-on-surface tracking-tight">
+            Ils ont transformé leurs résultats scolaires
+          </h2>
+          <p class="text-sm text-on-surface-variant mt-2">
+            Découvrez comment RevizFlow libère les étudiants du stress des révisions de dernière minute.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Testimonial 1 -->
+          <div class="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container shadow-sm flex flex-col justify-between">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-1 text-amber-500">
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              </div>
+              <p class="text-sm text-on-surface italic leading-relaxed">
+                « En PASS Médecine, la masse de cours est écrasante. Le rétroplanning et l'algorithme de répétition espacée m'ont permis de classer mes fiches sans paniquer. Je suis passée dans le numerus dès la première tentative ! »
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-4 mt-4 border-t border-surface-container">
+              <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center font-bold text-primary text-xs">CM</div>
+              <div>
+                <h4 class="text-xs font-bold text-on-surface">Camille Moreau</h4>
+                <p class="text-[11px] text-tertiary">Médecine (PASS) • Sorbonne Univ.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container shadow-sm flex flex-col justify-between">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-1 text-amber-500">
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              </div>
+              <p class="text-sm text-on-surface italic leading-relaxed">
+                « Les ambiances sonores avec ondes 40Hz combinées au timer Pomodoro me plongent en état de flow en moins de 3 minutes. J'ai divisé mon temps de travail par 1.5 tout en retenant beaucoup mieux les formules. »
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-4 mt-4 border-t border-surface-container">
+              <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center font-bold text-teal-800 text-xs">TD</div>
+              <div>
+                <h4 class="text-xs font-bold text-on-surface">Théo Delmas</h4>
+                <p class="text-[11px] text-tertiary">CPGE Maths Sup / Spé • Lycée Saint-Louis</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container shadow-sm flex flex-col justify-between">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-1 text-amber-500">
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              </div>
+              <p class="text-sm text-on-surface italic leading-relaxed">
+                « La génération automatique de fiches synthétiques et de questions à partir de nos volumineux PDF de jurisprudence m'a fait gagner des dizaines d'heures avant le CRFPA. Indispensable. »
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-4 mt-4 border-t border-surface-container">
+              <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-800 text-xs">IB</div>
+              <div>
+                <h4 class="text-xs font-bold text-on-surface">Inès Benali</h4>
+                <p class="text-[11px] text-tertiary">Master 2 Droit des Affaires • Paris II Panthéon-Assas</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= 7. FAQ ACCORDION ======================= -->
+    <section id="faq" class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+      <div class="flex flex-col items-center text-center mb-12">
+        <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-surface-container text-on-surface text-xs uppercase tracking-wider font-extrabold mb-3">
+          <span class="material-symbols-outlined text-[16px]">help_outline</span>
+          Questions Fréquentes
+        </div>
+        <h2 class="text-3xl font-extrabold text-on-surface tracking-tight">
+          Tout ce que vous devez savoir sur RevizFlow
+        </h2>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        
+        <!-- FAQ Promo ACCES26 (Special Highlight) -->
+        <div class="bg-surface-container-lowest rounded-2xl border-2 border-emerald-300 overflow-hidden shadow-sm hover:border-emerald-400 transition-colors">
+          <button onclick="toggleFaq('faq-promo')" class="w-full text-left p-5 flex items-center justify-between font-bold text-sm text-on-surface hover:bg-emerald-50/40 transition-colors">
+            <div class="flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-[20px] text-primary">sell</span>
+              <span class="text-primary font-extrabold">Comment utiliser le code promo ACCES26 pour bénéficier de 14 jours gratuits ?</span>
+            </div>
+            <span id="faq-promo-icon" class="material-symbols-outlined text-[20px] text-primary transition-transform">expand_more</span>
+          </button>
+          <div id="faq-promo" class="hidden p-5 pt-0 text-xs sm:text-sm text-on-surface-variant leading-relaxed border-t border-emerald-100">
+            Lors de l'obtention de votre Pass Pro Étudiant, entrez simplement le code <strong class="font-mono text-primary font-extrabold bg-emerald-100 px-2 py-0.5 rounded border border-dashed border-emerald-400">ACCES26</strong> sur la page de paiement ou dans le formulaire d'inscription pour appliquer <strong>100% de réduction immédiate</strong> et bénéficier de vos 14 jours d'accès complet gratuit. Aucun prélèvement bancaire n'est requis pour démarrer.
+          </div>
+        </div>
+
+        <!-- FAQ 1 -->
+        <div class="bg-surface-container-lowest rounded-2xl border border-surface-container overflow-hidden">
+          <button onclick="toggleFaq('faq-1')" class="w-full text-left p-5 flex items-center justify-between font-bold text-sm text-on-surface hover:bg-surface-container-low/50 transition-colors">
+            <span>Comment fonctionne l'algorithme de répétition espacée (SM-2) ?</span>
+            <span id="faq-1-icon" class="material-symbols-outlined text-[20px] text-primary transition-transform">expand_more</span>
+          </button>
+          <div id="faq-1" class="hidden p-5 pt-0 text-xs sm:text-sm text-on-surface-variant leading-relaxed border-t border-surface-container/40">
+            L'algorithme SM-2 calcule scientifiquement le moment exact où votre mémoire commence à fléchir selon la loi d'Ebbinghaus. En espaçant les révisions (J+1, J+4, J+10, J+25), votre cerveau ancre l'information dans la mémoire à long terme sans bourrage de crâne inutile.
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="bg-surface-container-lowest rounded-2xl border border-surface-container overflow-hidden">
+          <button onclick="toggleFaq('faq-2')" class="w-full text-left p-5 flex items-center justify-between font-bold text-sm text-on-surface hover:bg-surface-container-low/50 transition-colors">
+            <span>Mes cours et fiches restent-ils privés et confidentiels ?</span>
+            <span id="faq-2-icon" class="material-symbols-outlined text-[20px] text-primary transition-transform">expand_more</span>
+          </button>
+          <div id="faq-2" class="hidden p-5 pt-0 text-xs sm:text-sm text-on-surface-variant leading-relaxed border-t border-surface-container/40">
+            Oui, absolument. Vos fichiers PDF, notes et flashcards sont chiffrés de bout en bout. Nous n'utilisons jamais vos documents pour entraîner des modèles publics d'intelligence artificielle.
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="bg-surface-container-lowest rounded-2xl border border-surface-container overflow-hidden">
+          <button onclick="toggleFaq('faq-3')" class="w-full text-left p-5 flex items-center justify-between font-bold text-sm text-on-surface hover:bg-surface-container-low/50 transition-colors">
+            <span>Puis-je importer mes jeux de cartes Anki ou Quizlet ?</span>
+            <span id="faq-3-icon" class="material-symbols-outlined text-[20px] text-primary transition-transform">expand_more</span>
+          </button>
+          <div id="faq-3" class="hidden p-5 pt-0 text-xs sm:text-sm text-on-surface-variant leading-relaxed border-t border-surface-container/40">
+            Oui, RevizFlow propose un module d'importation instantané en 1 clic pour les fichiers .apkg (Anki) et les exports CSV Quizlet ou Notion.
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="bg-surface-container-lowest rounded-2xl border border-surface-container overflow-hidden">
+          <button onclick="toggleFaq('faq-4')" class="w-full text-left p-5 flex items-center justify-between font-bold text-sm text-on-surface hover:bg-surface-container-low/50 transition-colors">
+            <span>L'essai gratuit de 14 jours nécessite-t-il une carte bancaire ?</span>
+            <span id="faq-4-icon" class="material-symbols-outlined text-[20px] text-primary transition-transform">expand_more</span>
+          </button>
+          <div id="faq-4" class="hidden p-5 pt-0 text-xs sm:text-sm text-on-surface-variant leading-relaxed border-t border-surface-container/40">
+            Non, aucune carte bancaire n'est demandée pour tester gratuitement toutes les fonctionnalités Pro pendant 14 jours avec le code ACCES26. À l'issue de l'essai, votre compte bascule sur la version Gratuite sans prélèvement.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================= 8. BOTTOM CTA BANNER ======================= -->
+    <section class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+      <div class="relative bg-gradient-to-br from-primary via-secondary to-[#00422b] rounded-3xl p-8 lg:p-16 text-white overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,108,73,0.45)]">
+        
+        <!-- Ambient Glow Decor -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary-container/20 rounded-full blur-2xl pointer-events-none"></div>
+        
+        <div class="relative z-10 max-w-2xl mx-auto text-center flex flex-col items-center gap-5">
+          <span class="px-4 py-1 rounded-full bg-white/15 backdrop-blur-md text-white text-xs uppercase font-extrabold tracking-wider">
+            Accès Gratuit Imminent
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            Prêt à transformer votre façon d'étudier ?
+          </h2>
+          <p class="text-sm sm:text-base text-emerald-100 max-w-xl leading-relaxed">
+            Rejoignez les étudiants qui ne passent plus leurs nuits à angoisser avant leurs épreuves. Commencez votre premier cycle de révision dès aujourd'hui.
+          </p>
+
+          <!-- Quick email input form -->
+          <form class="w-full max-w-md flex flex-col sm:flex-row items-center gap-2.5 mt-2" onsubmit="handleEmailSubmit(event)">
+            <input id="cta-email-input" class="w-full px-5 py-3.5 rounded-full bg-white text-on-surface placeholder:text-slate-400 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 shadow-md" placeholder="votre.email.etudiant@univ.fr" required type="email"/>
+            <button class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-primary-container hover:bg-emerald-400 text-white hover:text-emerald-950 font-bold text-xs whitespace-nowrap shadow-lg transition-all" type="submit">
+              Démarrer
+            </button>
+          </form>
+
+          <p class="text-[11px] text-emerald-200/80 font-medium">
+            Gratuit • Zéro engagement • Synchronisé sur ordi et téléphone
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="w-full bg-surface-container-lowest border-t border-surface-container mt-12 shadow-sm">
+    <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        
+        <!-- Col 1 & 2: Brand Info -->
+        <div class="lg:col-span-2 flex flex-col gap-4 pr-0 lg:pr-8">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-primary to-primary-container flex items-center justify-center text-white shadow-sm">
+              <span class="material-symbols-outlined text-[18px]">cyclone</span>
+            </div>
+            <span class="text-xl font-bold tracking-tight text-on-surface">RevizFlow</span>
+          </div>
+          <p class="text-xs text-on-surface-variant max-w-sm leading-relaxed">
+            L'espace de travail intelligent pour réviser méthodiquement, mémoriser durablement et libérer votre plein potentiel académique sans anxiété.
+          </p>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/50 text-[11px] font-bold text-on-secondary-container">
+              <span class="material-symbols-outlined text-[14px]">verified</span> 100% Conçu pour étudiants
+            </span>
+          </div>
+        </div>
+
+        <!-- Col 3: Produit -->
+        <div class="flex flex-col gap-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-on-surface">Produit</h4>
+          <div class="flex flex-col gap-2">
+            <a href="#outils" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Fonctionnalités Bento</a>
+            <a href="#demo-flashcards" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Répétition Espacée SM-2</a>
+            <a href="#demo-pomodoro" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Minuteur Pomodoro Flow</a>
+            <a href="#tarifs" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Offres Étudiants</a>
+          </div>
+        </div>
+
+        <!-- Col 4: Ressources -->
+        <div class="flex flex-col gap-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-on-surface">Ressources</h4>
+          <div class="flex flex-col gap-2">
+            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Guide de Révision Active</a>
+            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Modèles de Fiches Prépa & PASS</a>
+            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Blog d'Apprentissage IA</a>
+            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Calculateur de Mémoire</a>
+          </div>
+        </div>
+
+        <!-- Col 5: Communauté -->
+        <div class="flex flex-col gap-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-on-surface">Communauté</h4>
+          <div class="flex flex-col gap-2">
+            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Discord Étudiant (25k membres)</a>
+            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Programme Ambassadeurs</a>
+            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Salons d'Étude Virtuels</a>
+            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Support & FAQ 24/7</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-surface-container-low/50 rounded-xl px-6 py-4 border border-surface-container">
+        <p class="text-xs text-on-surface-variant">© 2026 RevizFlow Technologies Inc. Tous droits réservés.</p>
+        <div class="flex items-center gap-6">
+          <a href="#" class="text-xs text-on-surface-variant hover:text-on-surface transition-colors">Confidentialité</a>
+          <a href="#" class="text-xs text-on-surface-variant hover:text-on-surface transition-colors">Conditions de Service</a>
+          <a href="#" class="text-xs text-on-surface-variant hover:text-on-surface transition-colors">Mentions Légales</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================= MODAL: INSCRIPTION GRATUITE (AVEC CHAMP TÉLÉPHONE) ======================= -->
+  <div id="signup-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-surface-container-lowest w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl border border-surface-container relative">
+      
+      <button onclick="closeModal('signup-modal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-surface-container text-on-surface flex items-center justify-center hover:bg-surface-container-high transition-colors">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-primary-container text-white flex items-center justify-center mx-auto mb-3 shadow-md">
+          <span class="material-symbols-outlined text-[26px]">cyclone</span>
+        </div>
+        <h3 class="text-2xl font-extrabold text-on-surface">Créer mon compte</h3>
+        <p class="text-xs text-primary font-semibold mt-1 flex items-center justify-center gap-1">
+          <span class="material-symbols-outlined text-[15px]">verified</span>
+          <span>14 jours d'accès Pro 100% offerts • Code <strong class="font-mono font-bold">ACCES26</strong></span>
+        </p>
+      </div>
+
+      <form onsubmit="handleSignupSubmit(event)" class="flex flex-col gap-3.5">
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Nom complet</label>
+          <input type="text" required placeholder="Alexandre Dumas" class="w-full px-4 py-2.5 rounded-xl border border-surface-container bg-surface-container-low text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container"/>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Numéro de téléphone</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-tertiary">
+              <span class="material-symbols-outlined text-[18px]">call</span>
+            </span>
+            <input type="tel" required placeholder="+221 77 000 00 00 / +225 07..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-surface-container bg-surface-container-low text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container"/>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Email étudiant ou personnel</label>
+          <input type="email" required placeholder="alexandre@etudiant.univ.fr" class="w-full px-4 py-2.5 rounded-xl border border-surface-container bg-surface-container-low text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container"/>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Filière d'étude</label>
+          <select class="w-full px-4 py-2.5 rounded-xl border border-surface-container bg-surface-container-low text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container">
+            <option>Médecine / PASS / LAS</option>
+            <option>Classes Préparatoires (CPGE)</option>
+            <option>Droit / Sciences Politiques</option>
+            <option>École d'Ingénieur / Sciences</option>
+            <option>École de Commerce / Management</option>
+            <option>Autre filière universitaire</option>
+          </select>
+        </div>
+
+        <!-- Promo Code Input (Pre-filled ACCES26) -->
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1 flex items-center justify-between">
+            <span>Code Promo</span>
+            <span class="text-[10px] text-primary font-bold flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">check_circle</span> 100% de réduction
+            </span>
+          </label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-emerald-600">
+              <span class="material-symbols-outlined text-[18px]">sell</span>
+            </span>
+            <input type="text" id="modal-promo-code" value="ACCES26" placeholder="ACCES26" class="w-full pl-10 pr-24 py-2.5 rounded-xl border-2 border-emerald-300 bg-emerald-50/60 text-xs font-mono font-bold text-emerald-950 focus:outline-none focus:ring-2 focus:ring-primary-container uppercase tracking-wider"/>
+            <div class="absolute inset-y-0 right-1.5 flex items-center">
+              <span class="px-2 py-1 rounded-md bg-emerald-700 text-white text-[10px] font-extrabold tracking-wider">
+                -100% (14j)
+              </span>
+            </div>
+          </div>
+          <p class="text-[10px] text-emerald-700 font-semibold mt-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-[13px]">verified</span> Code promo <strong class="font-mono font-bold">ACCES26</strong> appliqué (-100% pendant 14 jours).
+          </p>
+        </div>
+
+        <button type="submit" class="mt-2 w-full py-3 rounded-full bg-primary-container hover:bg-primary text-white font-bold text-xs shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+          <span>Activer mes 14 jours avec ACCES26</span>
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </button>
+      </form>
+
+      <div class="text-center mt-4">
+        <p class="text-[11px] text-tertiary">
+          Déjà un compte ? 
+          <button onclick="closeModal('signup-modal'); openModal('login-modal')" class="text-primary font-bold hover:underline">Se connecter</button>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================= MODAL: CONNEXION ======================= -->
+  <div id="login-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-surface-container-lowest w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl border border-surface-container relative">
+      
+      <button onclick="closeModal('login-modal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-surface-container text-on-surface flex items-center justify-center hover:bg-surface-container-high transition-colors">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-secondary-container text-on-secondary-container flex items-center justify-center mx-auto mb-3 shadow-sm">
+          <span class="material-symbols-outlined text-[26px]">lock_open</span>
+        </div>
+        <h3 class="text-2xl font-extrabold text-on-surface">Bon retour parmi nous</h3>
+        <p class="text-xs text-on-surface-variant mt-1">Accédez à votre espace de travail et vos flashcards</p>
+      </div>
+
+      <form onsubmit="handleLoginSubmit(event)" class="flex flex-col gap-3.5">
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Email</label>
+          <input type="email" required placeholder="votre.email@etudiant.fr" class="w-full px-4 py-2.5 rounded-xl border border-surface-container bg-surface-container-low text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container"/>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Mot de passe</label>
+          <input type="password" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl border border-surface-container bg-surface-container-low text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container"/>
+        </div>
+
+        <div class="flex items-center justify-between text-[11px]">
+          <label class="flex items-center gap-1.5 text-on-surface cursor-pointer">
+            <input type="checkbox" checked class="rounded text-primary-container"/>
+            <span>Se souvenir de moi</span>
+          </label>
+          <a href="#" class="text-primary font-semibold hover:underline">Mot de passe oublié ?</a>
+        </div>
+
+        <button type="submit" class="mt-2 w-full py-3 rounded-full bg-primary-container hover:bg-primary text-white font-bold text-xs shadow-md hover:shadow-lg transition-all">
+          Accéder à RevizFlow
+        </button>
+      </form>
+
+      <div class="text-center mt-4">
+        <p class="text-[11px] text-tertiary">
+          Pas encore de compte ? 
+          <button onclick="closeModal('login-modal'); openModal('signup-modal')" class="text-primary font-bold hover:underline">Créer un compte gratuitement</button>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================= JAVASCRIPT LOGIC ======================= -->
+  <script>
+    // --- Mobile Menu ---
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // --- Modal Controls ---
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    // --- Toast Notification Helper ---
+    function showToast(message) {
+      let toast = document.getElementById('reviz-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'reviz-toast';
+        toast.className = 'fixed bottom-6 right-6 z-[100] max-w-sm bg-emerald-950 text-white px-4 py-3 rounded-2xl shadow-2xl border border-emerald-500/40 flex items-center gap-3 transform transition-all duration-300 translate-y-20 opacity-0';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `
+        <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-[18px]">verified</span>
+        </div>
+        <p class="text-xs font-semibold leading-snug">${message}</p>
+      `;
+      // Animate in
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-20', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+      });
+      // Animate out after 3.5s
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+
+    // --- Promo Code Quick Copy Function ---
+    function copyPromoCode(code = 'ACCES26', event = null) {
+      if (event) event.stopPropagation();
+      navigator.clipboard.writeText(code).then(() => {
+        showToast(`Code promo <strong>${code}</strong> copié ! (-100% / 14 jours offerts)`);
+        
+        // Update Hero promo icon temporarily
+        const heroIcon = document.getElementById('hero-promo-icon');
+        if (heroIcon) {
+          heroIcon.innerText = 'check';
+          setTimeout(() => { heroIcon.innerText = 'content_copy'; }, 2000);
+        }
+        const topIcon = document.getElementById('top-promo-icon');
+        if (topIcon) {
+          topIcon.innerText = 'check';
+          setTimeout(() => { topIcon.innerText = 'content_copy'; }, 2000);
+        }
+      }).catch(() => {
+        prompt("Copiez votre code promo :", code);
+      });
+    }
+
+    // Form handlers
+    function handleEmailSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('cta-email-input').value;
+      alert(`Merci ! L'accès à RevizFlow a été envoyé à : ${email}`);
+    }
+
+    function handleSignupSubmit(e) {
+      e.preventDefault();
+      const promoCode = document.getElementById('modal-promo-code')?.value || 'ACCES26';
+      alert(`Félicitations ! Votre compte RevizFlow Pro (14 jours offerts avec le code ${promoCode}) a été validé avec 100% de réduction immédiate.`);
+      closeModal('signup-modal');
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      alert("Connexion réussie ! Bienvenue dans votre Flow d'étude.");
+      closeModal('login-modal');
+    }
+
+    // --- Interactive Pomodoro Timer ---
+    let timerDuration = 25 * 60; // 25 minutes
+    let timeRemaining = timerDuration;
+    let timerInterval = null;
+    let isTimerRunning = false;
+    const circleCircumference = 326; // 2 * PI * 52
+
+    function updateTimerUI() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      document.getElementById('timer-display').innerText = 
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      
+      const offset = circleCircumference - (timeRemaining / timerDuration) * circleCircumference;
+      document.getElementById('pomodoro-circle').style.strokeDashoffset = offset;
+    }
+
+    function togglePomodoro() {
+      const icon = document.getElementById('timer-btn-icon');
+      if (isTimerRunning) {
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        icon.innerText = 'play_arrow';
+      } else {
+        isTimerRunning = true;
+        icon.innerText = 'pause';
+        timerInterval = setInterval(() => {
+          if (timeRemaining > 0) {
+            timeRemaining--;
+            updateTimerUI();
+          } else {
+            clearInterval(timerInterval);
+            isTimerRunning = false;
+            icon.innerText = 'play_arrow';
+            alert("Session Pomodoro terminée ! Prenez 5 minutes de pause bien méritée 🎉");
+          }
+        }, 1000);
+      }
+    }
+
+    function resetPomodoro() {
+      clearInterval(timerInterval);
+      isTimerRunning = false;
+      timeRemaining = timerDuration;
+      document.getElementById('timer-btn-icon').innerText = 'play_arrow';
+      updateTimerUI();
+    }
+
+    // --- Web Audio API Synth (Realistic Ambient Sound Generator) ---
+    let audioCtx = null;
+    let currentActiveSound = null;
+    let activeNoiseNode = null;
+    let activeGainNode = null;
+    let activeOscNode = null;
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function stopAllAudio() {
+      if (activeNoiseNode) {
+        try { activeNoiseNode.stop(); } catch(e){}
+        activeNoiseNode.disconnect();
+        activeNoiseNode = null;
+      }
+      if (activeOscNode) {
+        try { activeOscNode.stop(); } catch(e){}
+        activeOscNode.disconnect();
+        activeOscNode = null;
+      }
+      if (activeGainNode) {
+        activeGainNode.disconnect();
+        activeGainNode = null;
+      }
+      ['rain', 'alpha', 'cafe'].forEach(type => {
+        const icon = document.getElementById(`sound-${type}-icon`);
+        if (icon) icon.innerText = 'play_circle';
+      });
+      currentActiveSound = null;
+    }
+
+    function toggleAudio(type) {
+      initAudioContext();
+      if (currentActiveSound === type) {
+        stopAllAudio();
+        return;
+      }
+      stopAllAudio();
+      currentActiveSound = type;
+      document.getElementById(`sound-${type}-icon`).innerText = 'pause_circle';
+
+      const bufferSize = audioCtx.sampleRate * 2;
+      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+
+      if (type === 'rain') {
+        // Pink / Rain noise simulation
+        let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          b0 = 0.99886 * b0 + white * 0.0555179;
+          b1 = 0.99332 * b1 + white * 0.0750759;
+          b2 = 0.96900 * b2 + white * 0.1538520;
+          b3 = 0.86650 * b3 + white * 0.3104856;
+          b4 = 0.55000 * b4 + white * 0.5329522;
+          b5 = -0.7616 * b5 - white * 0.0168980;
+          data[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.04;
+          b6 = white * 0.115926;
+        }
+        const noise = audioCtx.createBufferSource();
+        noise.buffer = buffer;
+        noise.loop = true;
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.value = 1000;
+        const gain = audioCtx.createGain();
+        gain.gain.value = 0.3;
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+        noise.start();
+        activeNoiseNode = noise;
+        activeGainNode = gain;
+      } else if (type === 'alpha') {
+        // 40Hz binaural isochronic tone + soft 432Hz sine wave
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        gain.gain.value = 0.08;
+
+        osc1.type = 'sine';
+        osc1.frequency.value = 216; // Carrier
+        osc2.type = 'sine';
+        osc2.frequency.value = 256; // 40Hz difference = Alpha / Gamma entrainment
+
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc1.start();
+        osc2.start();
+        activeOscNode = osc1;
+        activeGainNode = gain;
+      } else if (type === 'cafe') {
+        // Soft brown noise for coffee shop rumble
+        let lastOut = 0.0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          data[i] = (lastOut + (0.02 * white)) / 1.02;
+          lastOut = data[i];
+          data[i] *= 0.15;
+        }
+        const noise = audioCtx.createBufferSource();
+        noise.buffer = buffer;
+        noise.loop = true;
+        const gain = audioCtx.createGain();
+        gain.gain.value = 0.25;
+        noise.connect(gain);
+        gain.connect(audioCtx.destination);
+        noise.start();
+        activeNoiseNode = noise;
+        activeGainNode = gain;
+      }
+    }
+
+    // --- Interactive Flashcards Deck ---
+    const flashcardDeck = [
+      {
+        category: "Anatomie • Carte 14/80",
+        interval: "+4j",
+        question: "Quelles sont les 3 branches principales de la crosse aortique ?",
+        answer: "1. Tronc brachiocéphalique<br/>2. Artère carotide commune gauche<br/>3. Artère subclavière gauche"
+      },
+      {
+        category: "Droit Constitutionnel • Carte 08/45",
+        interval: "+7j",
+        question: "Quel article de la Constitution régit l'engagement de la responsabilité du Gouvernement (49.3) ?",
+        answer: "Article 49, alinéa 3 de la Constitution de la Ve République (adoption sans vote d'un projet de loi de finances ou de financement de la sécurité sociale)."
+      },
+      {
+        category: "Biophysique • Carte 32/60",
+        interval: "+12j",
+        question: "Quelle est la formule de la loi de Beer-Lambert ?",
+        answer: "A = ε · l · c (Absorbance = coefficient d'extinction molaire × longueur de cuve × concentration)."
+      }
+    ];
+
+    let currentCardIndex = 0;
+    let isFlipped = false;
+
+    function flipFlashcard() {
+      isFlipped = !isFlipped;
+      const q = document.getElementById('fc-question');
+      const a = document.getElementById('fc-answer');
+      if (isFlipped) {
+        q.classList.add('hidden');
+        a.classList.remove('hidden');
+      } else {
+        q.classList.remove('hidden');
+        a.classList.add('hidden');
+      }
+    }
+
+    function rateFlashcard(difficulty) {
+      isFlipped = false;
+      document.getElementById('fc-question').classList.remove('hidden');
+      document.getElementById('fc-answer').classList.add('hidden');
+
+      currentCardIndex = (currentCardIndex + 1) % flashcardDeck.length;
+      const nextCard = flashcardDeck[currentCardIndex];
+      document.getElementById('fc-category').innerText = nextCard.category;
+      document.getElementById('fc-interval').innerHTML = `<span class="material-symbols-outlined text-[14px]">history</span> Intervalle: ${nextCard.interval}`;
+      document.getElementById('fc-question').innerText = nextCard.question;
+      document.getElementById('fc-answer').innerHTML = nextCard.answer;
+    }
+
+    // --- Pricing Billing Switch en FCFA ---
+    function setBilling(mode) {
+      const monthlyBtn = document.getElementById('billing-monthly-btn');
+      const annualBtn = document.getElementById('billing-annual-btn');
+      const pricePro = document.getElementById('price-pro');
+      const priceMajor = document.getElementById('price-major');
+      const periodPro = document.getElementById('period-pro');
+      const periodMajor = document.getElementById('period-major');
+
+      if (mode === 'annual') {
+        annualBtn.className = "px-5 py-2 rounded-full text-xs font-bold transition-all bg-white text-on-surface shadow-sm flex items-center gap-1.5";
+        monthlyBtn.className = "px-5 py-2 rounded-full text-xs font-bold text-on-surface-variant hover:text-on-surface transition-all";
+        pricePro.innerText = "890 FCFA";
+        periodPro.innerText = "/ mois (facturé annuellement)";
+        priceMajor.innerText = "3 490 FCFA";
+        periodMajor.innerText = "/ mois (facturé annuellement)";
+      } else {
+        monthlyBtn.className = "px-5 py-2 rounded-full text-xs font-bold transition-all bg-white text-on-surface shadow-sm";
+        annualBtn.className = "px-5 py-2 rounded-full text-xs font-bold text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-1.5";
+        pricePro.innerText = "1 199 FCFA";
+        periodPro.innerText = "/ mois";
+        priceMajor.innerText = "4 950 FCFA";
+        periodMajor.innerText = "/ mois";
+      }
+    }
+
+    // --- FAQ Accordion ---
+    function toggleFaq(id) {
+      const content = document.getElementById(id);
+      const icon = document.getElementById(`${id}-icon`);
+      const isHidden = content.classList.contains('hidden');
+
+      // Close other faqs
+      ['faq-promo', 'faq-1', 'faq-2', 'faq-3', 'faq-4'].forEach(fId => {
+        const el = document.getElementById(fId);
+        const ic = document.getElementById(`${fId}-icon`);
+        if (el) el.classList.add('hidden');
+        if (ic) ic.innerText = 'expand_more';
+      });
+
+      if (isHidden) {
+        content.classList.remove('hidden');
+        icon.innerText = 'expand_less';
+      }
+    }
+  </script>
+</body>
+</html>
