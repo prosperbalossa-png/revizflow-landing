@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr" class="dark scroll-smooth">
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -26,63 +26,42 @@
       theme: {
         extend: {
           colors: {
-            "surface": "#f8f9ff",
-            "surface-dim": "#cbdbf5",
-            "surface-bright": "#f8f9ff",
-            "surface-container-lowest": "#ffffff",
-            "surface-container-low": "#eff4ff",
-            "surface-container": "#e5eeff",
-            "surface-container-high": "#dce9ff",
-            "surface-container-highest": "#d3e4fe",
-            "on-surface": "#0b1c30",
-            "on-surface-variant": "#3c4a42",
-            "inverse-surface": "#213145",
-            "inverse-on-surface": "#eaf1ff",
-            "outline": "#6c7a71",
-            "outline-variant": "#bbcabf",
-            "surface-tint": "#006c49",
-            "primary": "#006c49",
-            "on-primary": "#ffffff",
-            "primary-container": "#10b981",
-            "on-primary-container": "#00422b",
-            "inverse-primary": "#4edea3",
-            "secondary": "#006c4e",
-            "on-secondary": "#ffffff",
+            "dark-base": "#070b14",
+            "dark-surface": "#0c1220",
+            "dark-card": "#111a2e",
+            "dark-card-hover": "#17233d",
+            "dark-border": "#1e293b",
+            "dark-border-light": "#334155",
+            "primary": "#10b981",
+            "primary-hover": "#059669",
+            "primary-light": "#34d399",
+            "primary-glow": "rgba(16, 185, 129, 0.25)",
             "secondary-container": "#80f9c8",
-            "on-secondary-container": "#007353",
-            "tertiary": "#565e74",
-            "on-tertiary": "#ffffff",
-            "tertiary-container": "#9ba2bb",
-            "on-tertiary-container": "#31394d",
-            "error": "#ba1a1a",
-            "primary-fixed": "#6ffbbe",
-            "primary-fixed-dim": "#4edea3",
-            "secondary-fixed": "#80f9c8",
-            "secondary-fixed-dim": "#62dcad"
+            "on-secondary-container": "#00422b"
           },
           fontFamily: {
             sans: ["'Plus Jakarta Sans'", "sans-serif"],
             handwriting: ["'Caveat'", "cursive"]
           },
           boxShadow: {
-            'bento': '0 4px 20px -2px rgba(16, 185, 129, 0.06), 0 1px 3px rgba(15, 23, 42, 0.03)',
-            'bento-hover': '0 16px 36px -6px rgba(16, 185, 129, 0.14), 0 4px 12px -2px rgba(15, 23, 42, 0.05)',
-            'glow-primary': '0 0 30px -5px rgba(16, 185, 129, 0.4)',
-            'glow-card': '0 20px 50px -15px rgba(16, 185, 129, 0.15)'
+            'dark-bento': '0 4px 25px -2px rgba(0, 0, 0, 0.6), 0 0 15px -3px rgba(16, 185, 129, 0.05)',
+            'dark-bento-hover': '0 16px 40px -4px rgba(0, 0, 0, 0.8), 0 0 25px -2px rgba(16, 185, 129, 0.18)',
+            'glow-emerald': '0 0 35px -5px rgba(16, 185, 129, 0.35)',
+            'glow-cyan': '0 0 35px -5px rgba(6, 182, 212, 0.3)'
           },
           animation: {
             'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             'float': 'float 4s ease-in-out infinite',
-            'shimmer': 'shimmer 2.5s infinite linear'
+            'glow-spin': 'glowSpin 10s linear infinite'
           },
           keyframes: {
             float: {
               '0%, 100%': { transform: 'translateY(0px)' },
               '50%': { transform: 'translateY(-6px)' }
             },
-            shimmer: {
-              '0%': { backgroundPosition: '-200% 0' },
-              '100%': { backgroundPosition: '200% 0' }
+            glowSpin: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' }
             }
           }
         }
@@ -93,6 +72,8 @@
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #070b14;
+      color: #f1f5f9;
     }
     .perspective-1000 {
       perspective: 1000px;
@@ -113,42 +94,57 @@
       width: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: #f8f9ff;
+      background: #070b14;
     }
     ::-webkit-scrollbar-thumb {
-      background: #bbcabf;
+      background: #1e293b;
       border-radius: 4px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #006c49;
+      background: #10b981;
     }
-    .mesh-gradient {
-      background: radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.12) 0%, transparent 40%),
-                  radial-gradient(circle at 85% 25%, rgba(128, 249, 200, 0.18) 0%, transparent 45%),
-                  radial-gradient(circle at 50% 80%, rgba(203, 219, 245, 0.25) 0%, transparent 50%);
-    }
-    .glass-nav {
-      background: rgba(255, 255, 255, 0.88);
+    .glass-dark-nav {
+      background: rgba(7, 11, 20, 0.85);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
     }
+    .glass-card {
+      background: rgba(17, 26, 46, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .radial-bg {
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.5) 0px, transparent 100%);
+    }
+    .grid-pattern {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
   </style>
 </head>
-<body class="bg-surface text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<body class="bg-dark-base text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-950 radial-bg">
+
+  <!-- Grid Background Overlay -->
+  <div class="fixed inset-0 grid-pattern pointer-events-none -z-20"></div>
 
   <!-- ======================= HEADER / TOP BANNER ======================= -->
-  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-surface-container/80 transition-all duration-300">
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 glass-dark-nav border-b border-slate-800/80 transition-all duration-300">
     
     <!-- Top 100% Free Announcement Bar -->
-    <div class="bg-gradient-to-r from-[#004d34] via-primary to-emerald-600 text-white py-1.5 px-4 text-xs font-semibold flex items-center justify-center gap-2 sm:gap-3 text-center border-b border-emerald-600/40">
-      <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/20 text-[11px] font-extrabold uppercase tracking-wider">
-        <span class="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
+    <div class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-slate-950 text-emerald-200 py-1.5 px-4 text-xs font-semibold flex items-center justify-center gap-2 sm:gap-3 text-center border-b border-emerald-500/20">
+      <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] font-extrabold uppercase tracking-wider">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
         100% Gratuit
       </span>
-      <span class="font-medium text-emerald-100">
-        Toutes les fonctionnalités IA, Flashcards & Pomodoro sont <strong class="text-white font-bold underline decoration-secondary-container underline-offset-2">100% gratuites et sans abonnement</strong>
+      <span class="font-medium text-slate-200">
+        Toutes les fonctionnalités IA, Flashcards & Pomodoro sont <strong class="text-white font-bold underline decoration-emerald-400 underline-offset-2">100% gratuites et sans abonnement</strong>
       </span>
-      <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center gap-1 text-secondary-container hover:text-white font-bold text-[11px] transition-colors">
+      <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center gap-1 text-emerald-400 hover:text-white font-bold text-[11px] transition-colors">
         <span>Ouvrir l'app</span>
         <span class="material-symbols-outlined text-[13px]">arrow_forward</span>
       </a>
@@ -159,56 +155,56 @@
       
       <!-- Brand Logo -->
       <a href="#" class="flex items-center gap-3 group focus:outline-none">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-primary to-primary-container flex items-center justify-center text-white shadow-[0_2px_10px_rgba(16,185,129,0.3)] group-hover:scale-105 transition-transform">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-[0_0_20px_rgba(16,185,129,0.4)] group-hover:scale-105 transition-transform">
           <span class="material-symbols-outlined text-[24px]">cyclone</span>
         </div>
         <div class="flex flex-col">
-          <span class="text-xl font-extrabold tracking-tight text-on-surface flex items-center gap-1.5">
+          <span class="text-xl font-extrabold tracking-tight text-white flex items-center gap-1.5">
             RevizFlow
-            <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-emerald-100 text-primary border border-emerald-300 tracking-wider">Gratuit</span>
+            <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 tracking-wider">Gratuit</span>
           </span>
         </div>
       </a>
 
       <!-- Desktop Nav Links -->
-      <nav class="hidden lg:flex items-center gap-1 p-1 bg-surface-container-low/70 rounded-full border border-surface-container/70 shadow-sm">
-        <a href="#outils" class="px-4 py-1.5 rounded-full text-xs font-semibold text-on-surface-variant hover:text-on-surface hover:bg-white transition-all">Fonctionnalités</a>
-        <a href="#demo-ia" class="px-4 py-1.5 rounded-full text-xs font-semibold text-on-surface-variant hover:text-on-surface hover:bg-white transition-all">Générateur IA</a>
-        <a href="#demo-flashcards" class="px-4 py-1.5 rounded-full text-xs font-semibold text-on-surface-variant hover:text-on-surface hover:bg-white transition-all">Flashcards SRS</a>
-        <a href="#demo-pomodoro" class="px-4 py-1.5 rounded-full text-xs font-semibold text-on-surface-variant hover:text-on-surface hover:bg-white transition-all">Pomodoro & Sons</a>
-        <a href="#pourquoi-gratuit" class="px-4 py-1.5 rounded-full text-xs font-semibold text-emerald-800 bg-emerald-100/70 hover:bg-emerald-200/80 transition-all font-bold">100% Gratuit</a>
-        <a href="#temoignages" class="px-4 py-1.5 rounded-full text-xs font-semibold text-on-surface-variant hover:text-on-surface hover:bg-white transition-all">Avis</a>
-        <a href="#faq" class="px-4 py-1.5 rounded-full text-xs font-semibold text-on-surface-variant hover:text-on-surface hover:bg-white transition-all">FAQ</a>
+      <nav class="hidden lg:flex items-center gap-1 p-1 bg-slate-900/80 rounded-full border border-slate-800 shadow-inner">
+        <a href="#outils" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition-all">Fonctionnalités</a>
+        <a href="#demo-ia" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition-all">Générateur IA</a>
+        <a href="#demo-flashcards" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition-all">Flashcards SRS</a>
+        <a href="#demo-pomodoro" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition-all">Pomodoro & Sons</a>
+        <a href="#pourquoi-gratuit" class="px-4 py-1.5 rounded-full text-xs font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 hover:bg-emerald-900/50 transition-all font-bold">100% Gratuit</a>
+        <a href="#temoignages" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition-all">Avis</a>
+        <a href="#faq" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition-all">FAQ</a>
       </nav>
 
       <!-- Header Action Buttons -->
       <div class="flex items-center gap-3">
-        <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-bold text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-colors">
+        <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 rounded-full transition-colors">
           Connexion
         </a>
-        <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-primary-container text-white hover:bg-primary font-extrabold text-xs sm:text-sm rounded-full shadow-[0_4px_14px_rgba(16,185,129,0.35)] hover:shadow-[0_6px_20px_rgba(16,185,129,0.45)] hover:-translate-y-0.5 transition-all">
+        <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-xs sm:text-sm rounded-full shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] hover:-translate-y-0.5 transition-all">
           <span>Lancer RevizFlow (Gratuit)</span>
           <span class="material-symbols-outlined text-[18px]">rocket_launch</span>
         </a>
         
         <!-- Mobile Menu Toggle Button -->
-        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-xl text-on-surface hover:bg-surface-container transition-colors" aria-label="Menu Mobile">
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-xl text-slate-300 hover:bg-slate-800 transition-colors" aria-label="Menu Mobile">
           <span class="material-symbols-outlined text-[26px]">menu</span>
         </button>
       </div>
     </div>
 
     <!-- Mobile Navigation Dropdown -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-surface-container-lowest border-b border-surface-container px-6 py-5 flex flex-col gap-3 shadow-2xl">
-      <a href="#outils" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-on-surface hover:text-primary">Fonctionnalités Outils</a>
-      <a href="#demo-ia" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-on-surface hover:text-primary">Générateur de Cours IA</a>
-      <a href="#demo-flashcards" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-on-surface hover:text-primary">Flashcards SM-2 & Répétition Espacée</a>
-      <a href="#demo-pomodoro" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-on-surface hover:text-primary">Minuteur Pomodoro Flow & Ondes 40Hz</a>
-      <a href="#pourquoi-gratuit" onclick="toggleMobileMenu()" class="py-2 text-sm font-bold text-primary">Pourquoi est-ce 100% Gratuit ?</a>
-      <a href="#temoignages" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-on-surface hover:text-primary">Témoignages Étudiants</a>
-      <a href="#faq" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-on-surface hover:text-primary">Questions Fréquentes</a>
-      <div class="pt-3 border-t border-surface-container flex flex-col gap-2">
-        <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-full bg-primary-container text-white text-sm font-extrabold shadow-md text-center flex items-center justify-center gap-2">
+    <div id="mobile-menu" class="hidden lg:hidden bg-slate-950/95 border-b border-slate-800 px-6 py-5 flex flex-col gap-3 shadow-2xl backdrop-blur-2xl">
+      <a href="#outils" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-slate-300 hover:text-emerald-400">Fonctionnalités Outils</a>
+      <a href="#demo-ia" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-slate-300 hover:text-emerald-400">Générateur de Cours IA</a>
+      <a href="#demo-flashcards" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-slate-300 hover:text-emerald-400">Flashcards SM-2 & Répétition Espacée</a>
+      <a href="#demo-pomodoro" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-slate-300 hover:text-emerald-400">Minuteur Pomodoro Flow & Ondes 40Hz</a>
+      <a href="#pourquoi-gratuit" onclick="toggleMobileMenu()" class="py-2 text-sm font-bold text-emerald-400">Pourquoi est-ce 100% Gratuit ?</a>
+      <a href="#temoignages" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-slate-300 hover:text-emerald-400">Témoignages Étudiants</a>
+      <a href="#faq" onclick="toggleMobileMenu()" class="py-2 text-sm font-semibold text-slate-300 hover:text-emerald-400">Questions Fréquentes</a>
+      <div class="pt-3 border-t border-slate-800 flex flex-col gap-2">
+        <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-full bg-emerald-500 text-slate-950 text-sm font-extrabold shadow-md text-center flex items-center justify-center gap-2">
           <span>Accéder à l'application Gratuite</span>
           <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
         </a>
@@ -218,11 +214,11 @@
 
   <main class="w-full pt-28 sm:pt-36 overflow-hidden">
     
-    <!-- Ambient Background Lighting -->
+    <!-- Ambient Background Neon Lights -->
     <div class="relative w-full pointer-events-none">
-      <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-[900px] h-[480px] bg-gradient-to-tr from-primary-fixed-dim/25 via-primary-container/20 to-secondary-container/20 rounded-full blur-3xl -z-10"></div>
-      <div class="absolute top-64 right-5 w-[420px] h-[420px] bg-secondary-container/30 rounded-full blur-3xl -z-10"></div>
-      <div class="absolute top-96 left-5 w-[380px] h-[380px] bg-surface-dim/40 rounded-full blur-3xl -z-10"></div>
+      <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-tr from-emerald-500/20 via-teal-500/15 to-transparent rounded-full blur-[120px] -z-10"></div>
+      <div class="absolute top-72 right-0 w-[450px] h-[450px] bg-emerald-500/10 rounded-full blur-[100px] -z-10"></div>
+      <div class="absolute top-96 left-0 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px] -z-10"></div>
     </div>
 
     <!-- ======================= 1. HERO SECTION ======================= -->
@@ -233,75 +229,75 @@
         <div class="lg:col-span-7 flex flex-col items-start gap-5">
           
           <!-- Announcement Pill: 100% Free Guarantee -->
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-300/80 shadow-sm hover:shadow-md transition-all">
-            <span class="relative flex h-2.5 w-2.5 shrink-0">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary-container"></span>
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.15)] hover:border-emerald-500 transition-all">
+            <span class="relative flex h-2 w-2 shrink-0">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
             </span>
-            <span class="text-[11px] uppercase tracking-wider text-primary font-extrabold bg-emerald-200/80 px-2 py-0.5 rounded-full">Projet Libre & Gratuit</span>
-            <span class="text-xs font-bold text-on-surface">Zéro abonnement • 100% Inclus à vie</span>
-            <span class="material-symbols-outlined text-[16px] text-primary">volunteer_activism</span>
+            <span class="text-[11px] uppercase tracking-wider text-emerald-400 font-extrabold bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-500/30">Projet Libre & Gratuit</span>
+            <span class="text-xs font-bold text-slate-200">Zéro abonnement • 100% Inclus à vie</span>
+            <span class="material-symbols-outlined text-[16px] text-emerald-400">volunteer_activism</span>
           </div>
 
           <!-- Main Hero Headline -->
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-on-surface tracking-tight leading-[1.12] max-w-2xl">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] max-w-2xl">
             Révisez sans stress.<br/>
-            Mémorisez <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-container to-secondary">2x plus vite</span> avec l'IA.
+            Mémorisez <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">2x plus vite</span> avec l'IA.
           </h1>
 
           <!-- Hero Subtitle -->
-          <p class="text-base sm:text-lg text-on-surface-variant max-w-xl leading-relaxed font-normal">
-            RevizFlow transforme instantanément vos cours, PDF et documents en <strong>flashcards intelligentes (SRS)</strong>, <strong>résumés structurés</strong> et <strong>séances Pomodoro neuro-optimisées</strong>. Tout est 100% gratuit pour chaque étudiant.
+          <p class="text-base sm:text-lg text-slate-300 max-w-xl leading-relaxed font-normal">
+            RevizFlow transforme instantanément vos cours, PDF et documents en <strong>flashcards intelligentes (SRS)</strong>, <strong>résumés méthodiques</strong> et <strong>séances Pomodoro neuro-optimisées</strong>. Tout est 100% gratuit pour chaque étudiant.
           </p>
 
           <!-- Primary CTAs -->
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full sm:w-auto pt-2">
-            <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-primary-container hover:bg-primary text-white font-extrabold text-sm sm:text-base rounded-full shadow-[0_12px_28px_-6px_rgba(16,185,129,0.45)] hover:shadow-[0_16px_34px_-6px_rgba(16,185,129,0.55)] hover:-translate-y-0.5 transition-all group">
+            <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-sm sm:text-base rounded-full shadow-[0_0_25px_rgba(16,185,129,0.4)] hover:shadow-[0_0_35px_rgba(16,185,129,0.6)] hover:-translate-y-0.5 transition-all group">
               <span>Commencer à réviser gratuitement</span>
               <span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </a>
-            <a href="#demo-ia" class="inline-flex items-center justify-center gap-2 px-6 py-4 bg-white text-on-surface font-bold text-sm rounded-full shadow-sm border border-surface-container hover:bg-surface-container-low transition-all">
-              <span class="material-symbols-outlined text-[20px] text-primary" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+            <a href="#demo-ia" class="inline-flex items-center justify-center gap-2 px-6 py-4 bg-slate-900/90 hover:bg-slate-800 text-white font-bold text-sm rounded-full shadow-sm border border-slate-700 hover:border-slate-600 transition-all">
+              <span class="material-symbols-outlined text-[20px] text-emerald-400" style="font-variation-settings: 'FILL' 1;">play_circle</span>
               <span>Tester les démos interactives</span>
             </a>
           </div>
 
           <!-- Micro commitment points -->
-          <div class="flex flex-wrap items-center gap-4 text-xs text-on-surface-variant font-medium pt-1">
+          <div class="flex flex-wrap items-center gap-4 text-xs text-slate-400 font-medium pt-1">
             <span class="flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+              <span class="material-symbols-outlined text-[16px] text-emerald-400">check_circle</span>
               100% Gratuit sans carte bancaire
             </span>
             <span class="flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+              <span class="material-symbols-outlined text-[16px] text-emerald-400">check_circle</span>
               Générateur IA & Flashcards illimités
             </span>
             <span class="flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+              <span class="material-symbols-outlined text-[16px] text-emerald-400">check_circle</span>
               Synchronisation Mobile & Web
             </span>
           </div>
 
           <!-- Social Proof Snippet -->
-          <div class="flex flex-wrap items-center gap-4 pt-4 mt-2 border-t border-surface-container/80 w-full">
+          <div class="flex flex-wrap items-center gap-4 pt-4 mt-2 border-t border-slate-800 w-full">
             <div class="flex -space-x-2.5 overflow-hidden">
-              <div class="inline-flex h-10 w-10 rounded-full bg-emerald-100 ring-2 ring-white items-center justify-center text-primary font-bold text-xs shadow-sm">SL</div>
-              <div class="inline-flex h-10 w-10 rounded-full bg-teal-100 ring-2 ring-white items-center justify-center text-teal-900 font-bold text-xs shadow-sm">MD</div>
-              <div class="inline-flex h-10 w-10 rounded-full bg-emerald-200 ring-2 ring-white items-center justify-center text-emerald-950 font-bold text-xs shadow-sm">TC</div>
-              <div class="inline-flex h-10 w-10 rounded-full bg-slate-200 ring-2 ring-white items-center justify-center text-slate-800 font-bold text-xs shadow-sm">AL</div>
-              <div class="inline-flex h-10 w-10 rounded-full bg-amber-100 ring-2 ring-white items-center justify-center text-amber-900 font-bold text-xs shadow-sm">+25k</div>
+              <div class="inline-flex h-10 w-10 rounded-full bg-emerald-950 border-2 border-slate-900 items-center justify-center text-emerald-400 font-bold text-xs shadow-sm">SL</div>
+              <div class="inline-flex h-10 w-10 rounded-full bg-teal-950 border-2 border-slate-900 items-center justify-center text-teal-300 font-bold text-xs shadow-sm">MD</div>
+              <div class="inline-flex h-10 w-10 rounded-full bg-slate-800 border-2 border-slate-900 items-center justify-center text-emerald-300 font-bold text-xs shadow-sm">TC</div>
+              <div class="inline-flex h-10 w-10 rounded-full bg-slate-900 border-2 border-slate-900 items-center justify-center text-slate-200 font-bold text-xs shadow-sm">AL</div>
+              <div class="inline-flex h-10 w-10 rounded-full bg-emerald-900 border-2 border-slate-900 items-center justify-center text-white font-bold text-xs shadow-sm">+25k</div>
             </div>
             <div class="flex flex-col">
-              <div class="flex items-center gap-1 text-amber-500">
+              <div class="flex items-center gap-1 text-amber-400">
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                <span class="text-xs text-on-surface font-extrabold ml-1.5">4.9 / 5</span>
+                <span class="text-xs text-white font-extrabold ml-1.5">4.9 / 5</span>
               </div>
-              <p class="text-xs text-on-surface-variant font-medium">
-                Rejoint par <strong class="text-on-surface font-bold">+25 000 étudiants</strong> en Médecine, CPGE, Droit, Éco & Ingénierie
+              <p class="text-xs text-slate-400 font-medium">
+                Rejoint par <strong class="text-slate-200 font-bold">+25 000 étudiants</strong> en Médecine, CPGE, Droit, Éco & Ingénierie
               </p>
             </div>
           </div>
@@ -309,38 +305,38 @@
 
         <!-- Hero Visual Showcase / Live Dashboard Preview (5 cols) -->
         <div class="lg:col-span-5 relative mt-6 lg:mt-0">
-          <div class="relative bg-white rounded-3xl p-4 sm:p-5 shadow-glow-card border border-surface-container">
+          <div class="relative bg-dark-card rounded-3xl p-4 sm:p-5 shadow-dark-bento-hover border border-slate-800">
             
             <!-- App Preview Mockup Window -->
-            <div class="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 text-white p-5 flex flex-col justify-between min-h-[420px]">
+            <div class="relative rounded-2xl overflow-hidden bg-slate-950 text-white p-5 flex flex-col justify-between min-h-[420px] border border-slate-800">
               
               <!-- Window Top Bar -->
-              <div class="flex items-center justify-between border-b border-white/10 pb-3 z-10">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-3 z-10">
                 <div class="flex items-center gap-2">
-                  <span class="w-3 h-3 rounded-full bg-red-400"></span>
-                  <span class="w-3 h-3 rounded-full bg-amber-400"></span>
-                  <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
-                  <span class="text-xs font-semibold text-slate-300 ml-2">RevizFlow App • Session Active</span>
+                  <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                  <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                  <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                  <span class="text-xs font-semibold text-slate-400 ml-2">RevizFlow App • Session Active</span>
                 </div>
-                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                   ⚡ Mode Flow IA
                 </span>
               </div>
 
               <!-- Interactive Card Inside Hero Visual -->
               <div class="my-auto py-4 z-10 flex flex-col gap-3">
-                <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/15 shadow-lg">
-                  <div class="flex items-center justify-between text-xs text-emerald-300 font-semibold mb-2">
+                <div class="bg-slate-900/90 backdrop-blur-md rounded-xl p-4 border border-slate-800 shadow-lg">
+                  <div class="flex items-center justify-between text-xs text-emerald-400 font-semibold mb-2">
                     <span class="flex items-center gap-1.5">
                       <span class="material-symbols-outlined text-[16px]">psychology</span>
                       Deck : Physiologie Cardiovasculaire
                     </span>
-                    <span class="bg-emerald-400/20 text-emerald-300 px-2 py-0.5 rounded text-[10px] font-bold">Répétition J+7</span>
+                    <span class="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded text-[10px] font-bold border border-emerald-500/30">Répétition J+7</span>
                   </div>
                   <p class="text-sm sm:text-base font-bold text-white leading-snug">
                     Quel est le mécanisme principal du réflexe barorécepteur lors d'une chute de pression artérielle ?
                   </p>
-                  <div class="mt-3 flex items-center justify-between text-xs text-slate-300 bg-white/5 rounded-lg p-2">
+                  <div class="mt-3 flex items-center justify-between text-xs text-slate-400 bg-slate-950/80 rounded-lg p-2.5 border border-slate-800">
                     <span>💡 Rétention estimée</span>
                     <span class="text-emerald-400 font-bold">98.4% • Mémorisé à long terme</span>
                   </div>
@@ -348,60 +344,60 @@
 
                 <!-- Study Streak & Stats Floating Strip -->
                 <div class="grid grid-cols-3 gap-2 text-center">
-                  <div class="bg-white/10 backdrop-blur-sm rounded-xl p-2.5 border border-white/10">
-                    <span class="text-[10px] text-slate-400 block uppercase font-semibold">Série</span>
+                  <div class="bg-slate-900/80 backdrop-blur-sm rounded-xl p-2.5 border border-slate-800">
+                    <span class="text-[10px] text-slate-500 block uppercase font-semibold">Série</span>
                     <span class="text-sm font-extrabold text-amber-400 flex items-center justify-center gap-1">
                       <span class="material-symbols-outlined text-[16px]">local_fire_department</span> 14 jours
                     </span>
                   </div>
-                  <div class="bg-white/10 backdrop-blur-sm rounded-xl p-2.5 border border-white/10">
-                    <span class="text-[10px] text-slate-400 block uppercase font-semibold">Flashcards</span>
+                  <div class="bg-slate-900/80 backdrop-blur-sm rounded-xl p-2.5 border border-slate-800">
+                    <span class="text-[10px] text-slate-500 block uppercase font-semibold">Flashcards</span>
                     <span class="text-sm font-extrabold text-emerald-400">184 / 200</span>
                   </div>
-                  <div class="bg-white/10 backdrop-blur-sm rounded-xl p-2.5 border border-white/10">
-                    <span class="text-[10px] text-slate-400 block uppercase font-semibold">Flow</span>
+                  <div class="bg-slate-900/80 backdrop-blur-sm rounded-xl p-2.5 border border-slate-800">
+                    <span class="text-[10px] text-slate-500 block uppercase font-semibold">Flow</span>
                     <span class="text-sm font-extrabold text-teal-300">2h 45m</span>
                   </div>
                 </div>
               </div>
 
               <!-- Bottom Status in Window -->
-              <div class="flex items-center justify-between pt-3 border-t border-white/10 text-xs text-slate-300 z-10">
-                <span class="flex items-center gap-1.5 text-emerald-300 font-medium">
+              <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs text-slate-400 z-10">
+                <span class="flex items-center gap-1.5 text-emerald-400 font-medium">
                   <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                   Génération IA & SRS 100% Actifs
                 </span>
-                <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="text-white hover:text-emerald-300 font-bold underline transition-colors">
+                <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="text-white hover:text-emerald-400 font-bold underline transition-colors">
                   Accéder à l'app →
                 </a>
               </div>
 
               <!-- Ambient Glow Decor inside visual -->
-              <div class="absolute -top-10 -right-10 w-48 h-48 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none"></div>
-              <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-teal-500/20 rounded-full blur-2xl pointer-events-none"></div>
+              <div class="absolute -top-10 -right-10 w-48 h-48 bg-emerald-500/15 rounded-full blur-2xl pointer-events-none"></div>
+              <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-cyan-500/15 rounded-full blur-2xl pointer-events-none"></div>
             </div>
 
             <!-- Floating Badge 1: 100% Free Badge -->
-            <div class="absolute -top-4 -right-3 sm:-right-4 bg-white rounded-2xl p-3.5 shadow-xl border border-surface-container flex items-center gap-3 animate-float">
-              <div class="w-11 h-11 rounded-xl bg-emerald-100 flex items-center justify-center text-primary font-bold text-lg shadow-sm">
+            <div class="absolute -top-4 -right-3 sm:-right-4 bg-dark-card rounded-2xl p-3.5 shadow-2xl border border-emerald-500/30 flex items-center gap-3 animate-float">
+              <div class="w-11 h-11 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold text-lg shadow-sm">
                 0€
               </div>
               <div class="flex flex-col">
-                <span class="text-sm font-extrabold text-on-surface leading-tight">100% Gratuit</span>
-                <span class="text-[11px] font-semibold text-emerald-700">Sans abonnement à vie</span>
+                <span class="text-sm font-extrabold text-white leading-tight">100% Gratuit</span>
+                <span class="text-[11px] font-semibold text-emerald-400">Sans abonnement à vie</span>
               </div>
             </div>
 
             <!-- Floating Badge 2: Real-time Retention -->
-            <div class="absolute -bottom-4 -left-3 sm:-left-4 bg-white rounded-2xl p-3.5 shadow-xl border border-surface-container flex items-center gap-3">
-              <div class="w-11 h-11 rounded-xl bg-primary-container text-white flex items-center justify-center animate-pulse">
+            <div class="absolute -bottom-4 -left-3 sm:-left-4 bg-dark-card rounded-2xl p-3.5 shadow-2xl border border-slate-800 flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center animate-pulse">
                 <span class="material-symbols-outlined text-[22px]">psychology</span>
               </div>
               <div>
                 <div class="flex items-center gap-1">
-                  <span class="text-[10px] text-primary font-extrabold uppercase tracking-wider">Algorithme SM-2</span>
+                  <span class="text-[10px] text-emerald-400 font-extrabold uppercase tracking-wider">Algorithme SM-2</span>
                 </div>
-                <p class="text-sm font-extrabold text-on-surface">+210% Rétention Mémoire</p>
+                <p class="text-sm font-extrabold text-white">+210% Rétention Mémoire</p>
               </div>
             </div>
 
@@ -412,19 +408,19 @@
     </section>
 
     <!-- ======================= 2. LOGO CLOUD / UNIVERSITIES ======================= -->
-    <section class="w-full bg-surface-container-low/60 py-10 border-y border-surface-container/80">
+    <section class="w-full bg-dark-surface/60 py-10 border-y border-slate-800/80">
       <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p class="text-xs uppercase tracking-widest text-tertiary font-extrabold mb-6">
+        <p class="text-xs uppercase tracking-widest text-slate-400 font-extrabold mb-6">
           Utilisé quotidiennement par des étudiants des universités et grandes écoles les plus exigeantes
         </p>
-        <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-12 lg:gap-16 opacity-85">
-          <span class="text-sm sm:text-base font-bold tracking-tight text-on-surface-variant hover:text-primary transition-colors cursor-default">Sorbonne Université</span>
-          <span class="text-sm sm:text-base font-bold tracking-tight text-on-surface-variant hover:text-primary transition-colors cursor-default">Sciences Po</span>
-          <span class="text-sm sm:text-base font-bold tracking-tight text-on-surface-variant hover:text-primary transition-colors cursor-default">École Polytechnique</span>
-          <span class="text-sm sm:text-base font-bold tracking-tight text-on-surface-variant hover:text-primary transition-colors cursor-default">HEC Paris</span>
-          <span class="text-sm sm:text-base font-bold tracking-tight text-on-surface-variant hover:text-primary transition-colors cursor-default">EPFL Lausanne</span>
-          <span class="text-sm sm:text-base font-bold tracking-tight text-on-surface-variant hover:text-primary transition-colors cursor-default">Université Paris Cité</span>
-          <span class="text-sm sm:text-base font-bold tracking-tight text-on-surface-variant hover:text-primary transition-colors cursor-default">UCLouvain</span>
+        <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-12 lg:gap-16 opacity-75">
+          <span class="text-sm sm:text-base font-bold tracking-tight text-slate-300 hover:text-emerald-400 transition-colors cursor-default">Sorbonne Université</span>
+          <span class="text-sm sm:text-base font-bold tracking-tight text-slate-300 hover:text-emerald-400 transition-colors cursor-default">Sciences Po</span>
+          <span class="text-sm sm:text-base font-bold tracking-tight text-slate-300 hover:text-emerald-400 transition-colors cursor-default">École Polytechnique</span>
+          <span class="text-sm sm:text-base font-bold tracking-tight text-slate-300 hover:text-emerald-400 transition-colors cursor-default">HEC Paris</span>
+          <span class="text-sm sm:text-base font-bold tracking-tight text-slate-300 hover:text-emerald-400 transition-colors cursor-default">EPFL Lausanne</span>
+          <span class="text-sm sm:text-base font-bold tracking-tight text-slate-300 hover:text-emerald-400 transition-colors cursor-default">Université Paris Cité</span>
+          <span class="text-sm sm:text-base font-bold tracking-tight text-slate-300 hover:text-emerald-400 transition-colors cursor-default">UCLouvain</span>
         </div>
       </div>
     </section>
@@ -432,88 +428,88 @@
     <!-- ======================= 3. LIVE INTERACTIVE AI GENERATOR SANDBOX ======================= -->
     <section id="demo-ia" class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
       <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-12">
-        <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-secondary-container/60 text-on-secondary-container text-xs uppercase tracking-wider font-extrabold mb-3">
+        <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-950 border border-emerald-500/30 text-emerald-400 text-xs uppercase tracking-wider font-extrabold mb-3">
           <span class="material-symbols-outlined text-[16px]">auto_awesome</span>
           Générateur de Cours par IA
         </div>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-on-surface tracking-tight">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
           Glissez votre cours. Obtenez instantanément vos fiches et flashcards.
         </h2>
-        <p class="text-base text-on-surface-variant mt-2 leading-relaxed">
+        <p class="text-base text-slate-300 mt-2 leading-relaxed">
           Testez directement le moteur d'extraction IA ci-dessous. Choisissez un exemple de cours ou collez vos notes pour voir la magie opérer.
         </p>
       </div>
 
       <!-- Interactive Generator Sandbox Widget -->
-      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-bento border border-surface-container">
+      <div class="bg-dark-card rounded-3xl p-6 sm:p-8 shadow-dark-bento border border-slate-800">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           <!-- Left Column: Input selection (5 cols) -->
           <div class="lg:col-span-5 flex flex-col gap-4">
-            <span class="text-xs font-bold text-tertiary uppercase tracking-wider">1. Choisissez un cours exemple :</span>
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">1. Choisissez un cours exemple :</span>
             
             <div class="grid grid-cols-1 gap-2.5">
-              <button onclick="selectCoursePreset('medecine')" id="preset-medecine" class="text-left p-3.5 rounded-2xl border-2 border-primary bg-emerald-50/70 hover:bg-emerald-50 transition-all flex items-center justify-between group">
+              <button onclick="selectCoursePreset('medecine')" id="preset-medecine" class="text-left p-3.5 rounded-2xl border-2 border-emerald-500 bg-emerald-950/40 hover:bg-emerald-950/60 transition-all flex items-center justify-between group">
                 <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-xl bg-red-100 text-red-700 flex items-center justify-center font-bold text-xs shrink-0">
+                  <div class="w-10 h-10 rounded-xl bg-red-950/80 border border-red-500/30 text-red-400 flex items-center justify-center font-bold text-xs shrink-0">
                     <span class="material-symbols-outlined text-[20px]">cardiology</span>
                   </div>
                   <div>
-                    <span class="text-xs font-bold text-on-surface block">Physiologie Cardiovasculaire.pdf</span>
-                    <span class="text-[11px] text-tertiary">Médecine PASS / LAS • 42 pages</span>
+                    <span class="text-xs font-bold text-white block">Physiologie Cardiovasculaire.pdf</span>
+                    <span class="text-[11px] text-slate-400">Médecine PASS / LAS • 42 pages</span>
                   </div>
                 </div>
-                <span class="material-symbols-outlined text-[20px] text-primary">check_circle</span>
+                <span class="material-symbols-outlined text-[20px] text-emerald-400">check_circle</span>
               </button>
 
-              <button onclick="selectCoursePreset('droit')" id="preset-droit" class="text-left p-3.5 rounded-2xl border border-surface-container bg-surface-container-low hover:bg-emerald-50/50 transition-all flex items-center justify-between group">
+              <button onclick="selectCoursePreset('droit')" id="preset-droit" class="text-left p-3.5 rounded-2xl border border-slate-800 bg-slate-900/80 hover:bg-slate-800 transition-all flex items-center justify-between group">
                 <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs shrink-0">
+                  <div class="w-10 h-10 rounded-xl bg-indigo-950/80 border border-indigo-500/30 text-indigo-400 flex items-center justify-center font-bold text-xs shrink-0">
                     <span class="material-symbols-outlined text-[20px]">gavel</span>
                   </div>
                   <div>
-                    <span class="text-xs font-bold text-on-surface block">Droit Administratif & Recours.docx</span>
-                    <span class="text-[11px] text-tertiary">Licence Droit / CRFPA • 28 pages</span>
+                    <span class="text-xs font-bold text-white block">Droit Administratif & Recours.docx</span>
+                    <span class="text-[11px] text-slate-400">Licence Droit / CRFPA • 28 pages</span>
                   </div>
                 </div>
-                <span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">arrow_forward</span>
+                <span class="material-symbols-outlined text-[20px] text-slate-500 group-hover:text-emerald-400">arrow_forward</span>
               </button>
 
-              <button onclick="selectCoursePreset('prepa')" id="preset-prepa" class="text-left p-3.5 rounded-2xl border border-surface-container bg-surface-container-low hover:bg-emerald-50/50 transition-all flex items-center justify-between group">
+              <button onclick="selectCoursePreset('prepa')" id="preset-prepa" class="text-left p-3.5 rounded-2xl border border-slate-800 bg-slate-900/80 hover:bg-slate-800 transition-all flex items-center justify-between group">
                 <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-xs shrink-0">
+                  <div class="w-10 h-10 rounded-xl bg-amber-950/80 border border-amber-500/30 text-amber-400 flex items-center justify-center font-bold text-xs shrink-0">
                     <span class="material-symbols-outlined text-[20px]">functions</span>
                   </div>
                   <div>
-                    <span class="text-xs font-bold text-on-surface block">Algèbre Linéaire & Espaces Vectoriels.pdf</span>
-                    <span class="text-[11px] text-tertiary">CPGE MPSI / MP • 35 pages</span>
+                    <span class="text-xs font-bold text-white block">Algèbre Linéaire & Espaces Vectoriels.pdf</span>
+                    <span class="text-[11px] text-slate-400">CPGE MPSI / MP • 35 pages</span>
                   </div>
                 </div>
-                <span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">arrow_forward</span>
+                <span class="material-symbols-outlined text-[20px] text-slate-500 group-hover:text-emerald-400">arrow_forward</span>
               </button>
             </div>
 
             <!-- Custom text input simulation -->
             <div class="mt-2 flex flex-col gap-2">
-              <label for="custom-course-input" class="text-xs font-bold text-tertiary uppercase tracking-wider">Ou collez vos propres notes :</label>
-              <textarea id="custom-course-input" rows="3" class="w-full p-3 rounded-xl border border-surface-container bg-surface text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container" placeholder="Ex: Le cycle de Krebs se déroule dans la matrice mitochondriale..."></textarea>
+              <label for="custom-course-input" class="text-xs font-bold text-slate-400 uppercase tracking-wider">Ou collez vos propres notes :</label>
+              <textarea id="custom-course-input" rows="3" class="w-full p-3 rounded-xl border border-slate-800 bg-slate-950 text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Ex: Le cycle de Krebs se déroule dans la matrice mitochondriale..."></textarea>
             </div>
 
-            <button id="generate-ia-btn" onclick="simulateAiGeneration()" class="w-full py-3.5 rounded-full bg-primary-container hover:bg-primary text-white font-extrabold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+            <button id="generate-ia-btn" onclick="simulateAiGeneration()" class="w-full py-3.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-sm shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all flex items-center justify-center gap-2">
               <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
               <span>Générer Fiche & Flashcards IA</span>
             </button>
           </div>
 
           <!-- Right Column: Live AI Output Preview (7 cols) -->
-          <div class="lg:col-span-7 bg-surface-container-low/70 rounded-2xl p-5 sm:p-6 border border-surface-container flex flex-col min-h-[420px]">
+          <div class="lg:col-span-7 bg-slate-950 rounded-2xl p-5 sm:p-6 border border-slate-800 flex flex-col min-h-[420px]">
             
-            <div class="flex items-center justify-between border-b border-surface-container pb-3 mb-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
               <div class="flex items-center gap-2">
-                <span id="ai-status-indicator" class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                <span id="ai-status-text" class="text-xs font-bold text-on-surface">Résultat de la synthèse IA (Prêt)</span>
+                <span id="ai-status-indicator" class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                <span id="ai-status-text" class="text-xs font-bold text-slate-200">Résultat de la synthèse IA (Prêt)</span>
               </div>
-              <span id="ai-speed-tag" class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-white text-primary border border-emerald-200 font-bold">
+              <span id="ai-speed-tag" class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-slate-900 text-emerald-400 border border-emerald-500/30 font-bold">
                 ⚡ 1.2s temps de génération
               </span>
             </div>
@@ -522,18 +518,18 @@
             <div id="ai-result-content" class="flex flex-col gap-4 flex-1 overflow-y-auto max-h-[350px] pr-1">
               
               <!-- Summary Card -->
-              <div class="bg-white p-4 rounded-xl border border-surface-container shadow-sm">
+              <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-800 shadow-sm">
                 <div class="flex items-center justify-between mb-2">
-                  <span class="text-xs font-extrabold text-primary uppercase tracking-wider flex items-center gap-1">
+                  <span class="text-xs font-extrabold text-emerald-400 uppercase tracking-wider flex items-center gap-1">
                     <span class="material-symbols-outlined text-[16px]">summarize</span>
                     Fiche Méthodique Structurée
                   </span>
-                  <span class="text-[10px] text-tertiary font-semibold">Hiérarchisation automatique</span>
+                  <span class="text-[10px] text-slate-500 font-semibold">Hiérarchisation automatique</span>
                 </div>
-                <h4 id="ai-summary-title" class="text-sm font-bold text-on-surface mb-1">
+                <h4 id="ai-summary-title" class="text-sm font-bold text-white mb-1">
                   Cardiologie : Débit Cardiaque, Réfraction et Baroréflexe
                 </h4>
-                <p id="ai-summary-text" class="text-xs text-on-surface-variant leading-relaxed">
+                <p id="ai-summary-text" class="text-xs text-slate-300 leading-relaxed">
                   • <strong>Formule maîtresse :</strong> Débit Cardiaque (DC) = Fréquence Cardiaque (FC) × Volume d'Éjection Systolique (VES).<br/>
                   • <strong>Régulation sympathique :</strong> Augmentation de l'inotropisme et chronotropisme via récepteurs β1-adrénergiques.<br/>
                   • <strong>Boucle baroréflexe :</strong> Capteurs sino-aortiques → nerf de Hering/Cyon → centre bulbaire → frein vagal immédiat.
@@ -541,23 +537,23 @@
               </div>
 
               <!-- Generated Flashcards Preview -->
-              <div class="bg-white p-4 rounded-xl border border-surface-container shadow-sm">
+              <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-800 shadow-sm">
                 <div class="flex items-center justify-between mb-2.5">
-                  <span class="text-xs font-extrabold text-emerald-800 uppercase tracking-wider flex items-center gap-1">
+                  <span class="text-xs font-extrabold text-teal-400 uppercase tracking-wider flex items-center gap-1">
                     <span class="material-symbols-outlined text-[16px]">style</span>
                     Flashcards SRS Générées (24 cartes)
                   </span>
-                  <span class="text-[10px] bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded-full font-bold">Format SM-2</span>
+                  <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold">Format SM-2</span>
                 </div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="ai-flashcards-list">
-                  <div class="p-2.5 rounded-lg bg-surface-container-low border border-surface-container text-xs">
-                    <span class="text-[10px] text-tertiary block font-bold">Recto</span>
-                    <p class="font-bold text-on-surface mt-0.5">Quel est l'effet de l'inotropisme positif ?</p>
+                  <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-xs">
+                    <span class="text-[10px] text-slate-500 block font-bold">Recto</span>
+                    <p class="font-bold text-slate-200 mt-0.5">Quel est l'effet de l'inotropisme positif ?</p>
                   </div>
-                  <div class="p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-200 text-xs">
-                    <span class="text-[10px] text-primary block font-bold">Verso (Réponse IA)</span>
-                    <p class="font-semibold text-emerald-950 mt-0.5">Augmentation de la force contractile du myocarde.</p>
+                  <div class="p-2.5 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-xs">
+                    <span class="text-[10px] text-emerald-400 block font-bold">Verso (Réponse IA)</span>
+                    <p class="font-semibold text-emerald-200 mt-0.5">Augmentation de la force contractile du myocarde ventriculaire.</p>
                   </div>
                 </div>
               </div>
@@ -565,9 +561,9 @@
             </div>
 
             <!-- Action to open app -->
-            <div class="mt-4 pt-3 border-t border-surface-container flex flex-wrap items-center justify-between gap-2">
-              <span class="text-xs text-tertiary font-medium">✨ Vous pouvez exporter en PDF, Anki (.apkg) ou réviser sur mobile</span>
-              <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+            <div class="mt-4 pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
+              <span class="text-xs text-slate-400 font-medium">✨ Export PDF, Anki (.apkg) ou révision instantanée sur mobile</span>
+              <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-emerald-400 hover:text-emerald-300 flex items-center gap-1">
                 <span>Créer vos propres fiches gratuitement</span>
                 <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
               </a>
@@ -584,15 +580,15 @@
       
       <!-- Section Header -->
       <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-        <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-secondary-container/60 text-on-secondary-container text-xs uppercase tracking-wider font-extrabold mb-3">
+        <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-950 border border-emerald-500/30 text-emerald-400 text-xs uppercase tracking-wider font-extrabold mb-3">
           <span class="material-symbols-outlined text-[16px]">category</span>
           Écosystème Tout-En-Un
         </div>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-on-surface tracking-tight">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
           Tout pour réussir vos études sans multiplier les abonnements
         </h2>
-        <p class="text-base text-on-surface-variant mt-2 leading-relaxed">
-          RevizFlow réunit les meilleurs outils de mémorisation, de gestion du temps et d'IA dans une interface fluide et sans friction.
+        <p class="text-base text-slate-300 mt-2 leading-relaxed">
+          RevizFlow réunit les meilleurs outils de mémorisation, de gestion du temps et d'IA dans une interface sombre, fluide et sans distraction.
         </p>
       </div>
 
@@ -600,38 +596,38 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
         
         <!-- Bento 1: Pomodoro & Ondes Binaurales (7 cols) -->
-        <div id="demo-pomodoro" class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 shadow-bento hover:shadow-bento-hover border border-surface-container flex flex-col justify-between transition-all">
+        <div id="demo-pomodoro" class="lg:col-span-7 bg-dark-card rounded-3xl p-6 sm:p-8 shadow-dark-bento hover:shadow-dark-bento-hover border border-slate-800 hover:border-slate-700 flex flex-col justify-between transition-all">
           <div>
             <div class="flex items-start justify-between gap-4 mb-3">
               <div>
-                <span class="text-[11px] text-primary font-extrabold uppercase tracking-wider">Neuro-Concentration</span>
-                <h3 class="text-2xl font-bold text-on-surface mt-1">Timer Pomodoro Adaptatif & Ondes 40Hz</h3>
-                <p class="text-xs sm:text-sm text-on-surface-variant mt-1.5 leading-relaxed">
+                <span class="text-[11px] text-emerald-400 font-extrabold uppercase tracking-wider">Neuro-Concentration</span>
+                <h3 class="text-2xl font-bold text-white mt-1">Timer Pomodoro Adaptatif & Ondes 40Hz</h3>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
                   Activez un état de flow profond en quelques secondes grâce à notre générateur audio d'ondes alpha et sons ambiants synthétisés en direct.
                 </p>
               </div>
-              <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 text-xs font-bold whitespace-nowrap">Interactif</span>
+              <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold whitespace-nowrap">Interactif</span>
             </div>
 
             <!-- Pomodoro Interactive Controls -->
-            <div class="bg-surface-container-low/70 rounded-2xl p-5 border border-surface-container flex flex-col sm:flex-row items-center justify-between gap-6 my-3">
+            <div class="bg-slate-950 rounded-2xl p-5 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6 my-3">
               
               <!-- Circular Animated Timer -->
               <div class="relative w-44 h-44 flex items-center justify-center shrink-0">
                 <svg class="w-full h-full -rotate-90" viewBox="0 0 120 120">
-                  <circle class="text-surface-container-highest" cx="60" cy="60" fill="transparent" r="52" stroke="currentColor" stroke-width="8"></circle>
-                  <circle id="pomodoro-circle" class="text-primary-container transition-all duration-1000" cx="60" cy="60" fill="transparent" r="52" stroke="currentColor" stroke-dasharray="326" stroke-dashoffset="0" stroke-linecap="round" stroke-width="8"></circle>
+                  <circle class="text-slate-800" cx="60" cy="60" fill="transparent" r="52" stroke="currentColor" stroke-width="8"></circle>
+                  <circle id="pomodoro-circle" class="text-emerald-400 transition-all duration-1000" cx="60" cy="60" fill="transparent" r="52" stroke="currentColor" stroke-dasharray="326" stroke-dashoffset="0" stroke-linecap="round" stroke-width="8"></circle>
                 </svg>
                 <div class="absolute flex flex-col items-center justify-center text-center">
-                  <span id="timer-display" class="text-3xl font-extrabold text-on-surface tabular-nums tracking-tight">25:00</span>
-                  <span id="timer-label" class="text-[10px] text-primary font-bold uppercase mt-0.5">Cycle Focus</span>
+                  <span id="timer-display" class="text-3xl font-extrabold text-white tabular-nums tracking-tight">25:00</span>
+                  <span id="timer-label" class="text-[10px] text-emerald-400 font-bold uppercase mt-0.5">Cycle Focus</span>
                   
                   <!-- Timer Control Buttons -->
                   <div class="flex items-center gap-2 mt-2">
-                    <button id="timer-toggle-btn" onclick="togglePomodoro()" class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center shadow-md hover:bg-primary transition-all" title="Démarrer / Pause">
+                    <button id="timer-toggle-btn" onclick="togglePomodoro()" class="w-8 h-8 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center shadow-md hover:bg-emerald-400 transition-all font-bold" title="Démarrer / Pause">
                       <span id="timer-btn-icon" class="material-symbols-outlined text-[18px]">play_arrow</span>
                     </button>
-                    <button onclick="resetPomodoro()" class="w-8 h-8 rounded-full bg-white border border-surface-container text-on-surface flex items-center justify-center hover:bg-surface-container transition-all" title="Réinitialiser">
+                    <button onclick="resetPomodoro()" class="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 text-slate-200 flex items-center justify-center hover:bg-slate-700 transition-all" title="Réinitialiser">
                       <span class="material-symbols-outlined text-[16px]">restart_alt</span>
                     </button>
                   </div>
@@ -640,198 +636,198 @@
 
               <!-- Web Audio Synthesizer Controls -->
               <div class="flex flex-col gap-2 w-full">
-                <span class="text-[11px] text-tertiary uppercase font-extrabold tracking-wider">Paysages Sonores Scientifiques :</span>
+                <span class="text-[11px] text-slate-400 uppercase font-extrabold tracking-wider">Paysages Sonores Scientifiques :</span>
                 
                 <!-- Rain Sound -->
-                <button onclick="toggleAudio('rain')" id="sound-rain-btn" class="w-full text-left flex items-center justify-between p-2.5 bg-white hover:bg-emerald-50 rounded-xl border border-surface-container shadow-sm transition-all group">
+                <button onclick="toggleAudio('rain')" id="sound-rain-btn" class="w-full text-left flex items-center justify-between p-2.5 bg-slate-900 hover:bg-slate-850 rounded-xl border border-slate-800 hover:border-emerald-500/40 transition-all group">
                   <div class="flex items-center gap-2.5">
-                    <span class="material-symbols-outlined text-[20px] text-primary group-hover:scale-110 transition-transform">rainy</span>
+                    <span class="material-symbols-outlined text-[20px] text-emerald-400 group-hover:scale-110 transition-transform">rainy</span>
                     <div>
-                      <span class="text-xs font-bold text-on-surface block">Pluie douce sur verrière</span>
-                      <span class="text-[10px] text-tertiary">Bruit rose apaisant</span>
+                      <span class="text-xs font-bold text-white block">Pluie douce sur verrière</span>
+                      <span class="text-[10px] text-slate-400">Bruit rose apaisant</span>
                     </div>
                   </div>
-                  <span id="sound-rain-icon" class="material-symbols-outlined text-[20px] text-primary">play_circle</span>
+                  <span id="sound-rain-icon" class="material-symbols-outlined text-[20px] text-emerald-400">play_circle</span>
                 </button>
 
                 <!-- 40Hz Alpha waves -->
-                <button onclick="toggleAudio('alpha')" id="sound-alpha-btn" class="w-full text-left flex items-center justify-between p-2.5 bg-white hover:bg-emerald-50 rounded-xl border border-surface-container shadow-sm transition-all group">
+                <button onclick="toggleAudio('alpha')" id="sound-alpha-btn" class="w-full text-left flex items-center justify-between p-2.5 bg-slate-900 hover:bg-slate-850 rounded-xl border border-slate-800 hover:border-emerald-500/40 transition-all group">
                   <div class="flex items-center gap-2.5">
-                    <span class="material-symbols-outlined text-[20px] text-emerald-600 group-hover:scale-110 transition-transform">graphic_eq</span>
+                    <span class="material-symbols-outlined text-[20px] text-teal-400 group-hover:scale-110 transition-transform">graphic_eq</span>
                     <div>
-                      <span class="text-xs font-bold text-on-surface block">Ondes Alpha 40Hz (Focus Pur)</span>
-                      <span class="text-[10px] text-tertiary">Fréquence neuronale de flux</span>
+                      <span class="text-xs font-bold text-white block">Ondes Alpha 40Hz (Focus Pur)</span>
+                      <span class="text-[10px] text-slate-400">Fréquence neuronale de flux</span>
                     </div>
                   </div>
-                  <span id="sound-alpha-icon" class="material-symbols-outlined text-[20px] text-tertiary">play_circle</span>
+                  <span id="sound-alpha-icon" class="material-symbols-outlined text-[20px] text-slate-500">play_circle</span>
                 </button>
 
                 <!-- Brown Noise / Cafe -->
-                <button onclick="toggleAudio('cafe')" id="sound-cafe-btn" class="w-full text-left flex items-center justify-between p-2.5 bg-white hover:bg-emerald-50 rounded-xl border border-surface-container shadow-sm transition-all group">
+                <button onclick="toggleAudio('cafe')" id="sound-cafe-btn" class="w-full text-left flex items-center justify-between p-2.5 bg-slate-900 hover:bg-slate-850 rounded-xl border border-slate-800 hover:border-emerald-500/40 transition-all group">
                   <div class="flex items-center gap-2.5">
-                    <span class="material-symbols-outlined text-[20px] text-amber-600 group-hover:scale-110 transition-transform">coffee</span>
+                    <span class="material-symbols-outlined text-[20px] text-amber-400 group-hover:scale-110 transition-transform">coffee</span>
                     <div>
-                      <span class="text-xs font-bold text-on-surface block">Café & Bibliothèque feutrée</span>
-                      <span class="text-[10px] text-tertiary">Bruit marron réconfortant</span>
+                      <span class="text-xs font-bold text-white block">Café & Bibliothèque feutrée</span>
+                      <span class="text-[10px] text-slate-400">Bruit marron réconfortant</span>
                     </div>
                   </div>
-                  <span id="sound-cafe-icon" class="material-symbols-outlined text-[20px] text-tertiary">play_circle</span>
+                  <span id="sound-cafe-icon" class="material-symbols-outlined text-[20px] text-slate-500">play_circle</span>
                 </button>
               </div>
 
             </div>
           </div>
 
-          <div class="flex flex-wrap items-center justify-between pt-3 gap-2 border-t border-surface-container/60">
+          <div class="flex flex-wrap items-center justify-between pt-3 gap-2 border-t border-slate-800">
             <div class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-primary-container text-[20px]">local_fire_department</span>
-              <span class="text-xs font-bold text-on-surface">Série de 14 jours consécutifs</span>
+              <span class="material-symbols-outlined text-amber-400 text-[20px]">local_fire_department</span>
+              <span class="text-xs font-bold text-slate-200">Série de 14 jours consécutifs</span>
             </div>
-            <span class="text-xs font-semibold text-tertiary">+35h de flow cumulées cette semaine</span>
+            <span class="text-xs font-semibold text-slate-400">+35h de flow cumulées cette semaine</span>
           </div>
         </div>
 
         <!-- Bento 2: Flashcards & Répétition Espacée SM-2 (5 cols) -->
-        <div id="demo-flashcards" class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 shadow-bento hover:shadow-bento-hover border border-surface-container flex flex-col justify-between transition-all">
+        <div id="demo-flashcards" class="lg:col-span-5 bg-dark-card rounded-3xl p-6 sm:p-8 shadow-dark-bento hover:shadow-dark-bento-hover border border-slate-800 hover:border-slate-700 flex flex-col justify-between transition-all">
           <div>
             <div class="flex items-start justify-between gap-2">
               <div>
-                <span class="text-[11px] text-primary font-extrabold uppercase tracking-wider">Mémorisation Active</span>
-                <h3 class="text-2xl font-bold text-on-surface mt-1">Flashcards & Répétition Espacée</h3>
-                <p class="text-xs sm:text-sm text-on-surface-variant mt-1.5 leading-relaxed">
+                <span class="text-[11px] text-emerald-400 font-extrabold uppercase tracking-wider">Mémorisation Active</span>
+                <h3 class="text-2xl font-bold text-white mt-1">Flashcards & Répétition Espacée</h3>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
                   L'algorithme SM-2 prédit la courbe d'oubli pour vous faire réviser chaque carte au moment exact où la mémoire faiblit.
                 </p>
               </div>
-              <span class="px-2.5 py-1 rounded-full bg-teal-100 text-teal-900 text-[11px] font-bold">SM-2</span>
+              <span class="px-2.5 py-1 rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30 text-[11px] font-bold">SM-2</span>
             </div>
 
             <!-- Flashcard 3D Flip Card -->
             <div class="relative my-5 px-2 perspective-1000">
               
               <!-- Stack Layers -->
-              <div class="w-[90%] mx-auto h-20 bg-surface-container-high/60 rounded-2xl -mb-16 scale-95 opacity-50"></div>
-              <div class="w-[95%] mx-auto h-20 bg-surface-container rounded-2xl -mb-16 scale-98 opacity-80"></div>
+              <div class="w-[90%] mx-auto h-20 bg-slate-900 rounded-2xl -mb-16 scale-95 opacity-50 border border-slate-800"></div>
+              <div class="w-[95%] mx-auto h-20 bg-slate-900 rounded-2xl -mb-16 scale-98 opacity-80 border border-slate-800"></div>
               
               <!-- Front Card -->
-              <div id="flashcard-element" onclick="flipFlashcard()" class="relative bg-surface rounded-2xl p-5 shadow-md border border-surface-container flex flex-col justify-between min-h-[210px] cursor-pointer hover:border-primary-container transition-all">
+              <div id="flashcard-element" onclick="flipFlashcard()" class="relative bg-slate-900 rounded-2xl p-5 shadow-lg border border-slate-800 flex flex-col justify-between min-h-[210px] cursor-pointer hover:border-emerald-500/50 transition-all">
                 
                 <div class="flex items-center justify-between">
-                  <span id="fc-category" class="px-2.5 py-0.5 rounded-full bg-secondary-container/60 text-xs font-bold text-on-secondary-container">
+                  <span id="fc-category" class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold">
                     Anatomie • Carte 14/80
                   </span>
-                  <span id="fc-interval" class="text-xs font-semibold text-tertiary flex items-center gap-1">
+                  <span id="fc-interval" class="text-xs font-semibold text-slate-400 flex items-center gap-1">
                     <span class="material-symbols-outlined text-[14px]">history</span> Intervalle: +4j
                   </span>
                 </div>
 
                 <div class="py-3 text-center">
-                  <p id="fc-question" class="text-sm sm:text-base font-bold text-on-surface leading-snug">
+                  <p id="fc-question" class="text-sm sm:text-base font-bold text-white leading-snug">
                     Quelles sont les 3 branches principales de la crosse aortique ?
                   </p>
-                  <p id="fc-answer" class="hidden text-xs sm:text-sm font-semibold text-primary mt-2">
+                  <p id="fc-answer" class="hidden text-xs sm:text-sm font-semibold text-emerald-300 mt-2">
                     1. Tronc brachiocéphalique<br/>2. Artère carotide commune gauche<br/>3. Artère subclavière gauche
                   </p>
-                  <span id="fc-hint" class="text-[11px] text-tertiary block mt-2 font-medium">💡 Cliquez sur la carte pour révéler la réponse</span>
+                  <span id="fc-hint" class="text-[11px] text-slate-500 block mt-2 font-medium">💡 Cliquez sur la carte pour révéler la réponse</span>
                 </div>
 
                 <!-- Difficulty Buttons -->
-                <div class="grid grid-cols-3 gap-2 pt-2 border-t border-surface-container" onclick="event.stopPropagation()">
-                  <button onclick="rateFlashcard('hard')" class="py-1.5 rounded-lg bg-red-50 text-red-700 text-[11px] font-bold hover:bg-red-100 transition-colors">Difficile (+1j)</button>
-                  <button onclick="rateFlashcard('medium')" class="py-1.5 rounded-lg bg-amber-50 text-amber-700 text-[11px] font-bold hover:bg-amber-100 transition-colors">Moyen (+4j)</button>
-                  <button onclick="rateFlashcard('easy')" class="py-1.5 rounded-lg bg-emerald-100 text-emerald-900 text-[11px] font-extrabold hover:bg-emerald-200 transition-colors">Facile (+10j)</button>
+                <div class="grid grid-cols-3 gap-2 pt-2 border-t border-slate-800" onclick="event.stopPropagation()">
+                  <button onclick="rateFlashcard('hard')" class="py-1.5 rounded-lg bg-rose-950/60 border border-rose-500/30 text-rose-300 text-[11px] font-bold hover:bg-rose-900/60 transition-colors">Difficile (+1j)</button>
+                  <button onclick="rateFlashcard('medium')" class="py-1.5 rounded-lg bg-amber-950/60 border border-amber-500/30 text-amber-300 text-[11px] font-bold hover:bg-amber-900/60 transition-colors">Moyen (+4j)</button>
+                  <button onclick="rateFlashcard('easy')" class="py-1.5 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 text-[11px] font-extrabold hover:bg-emerald-900/60 transition-colors">Facile (+10j)</button>
                 </div>
 
               </div>
             </div>
           </div>
 
-          <div class="flex items-center justify-between bg-surface-container-low rounded-xl px-4 py-2.5 border border-surface-container">
-            <span class="text-xs font-semibold text-on-surface">Algorithme de consolidation</span>
-            <span class="text-xs font-extrabold text-primary">+210% de rétention à long terme</span>
+          <div class="flex items-center justify-between bg-slate-950 rounded-xl px-4 py-2.5 border border-slate-800">
+            <span class="text-xs font-semibold text-slate-300">Algorithme de consolidation</span>
+            <span class="text-xs font-extrabold text-emerald-400">+210% de rétention à long terme</span>
           </div>
         </div>
 
         <!-- Bento 3: Rétroplanning Partiels IA (4 cols) -->
-        <div class="lg:col-span-4 bg-white rounded-3xl p-6 shadow-bento hover:shadow-bento-hover border border-surface-container flex flex-col justify-between transition-all">
+        <div class="lg:col-span-4 bg-dark-card rounded-3xl p-6 shadow-dark-bento hover:shadow-dark-bento-hover border border-slate-800 hover:border-slate-700 flex flex-col justify-between transition-all">
           <div>
-            <div class="w-11 h-11 rounded-2xl bg-secondary-container flex items-center justify-center text-on-secondary-container mb-3 shadow-sm">
+            <div class="w-11 h-11 rounded-2xl bg-teal-500/20 border border-teal-500/30 text-teal-300 flex items-center justify-center mb-3 shadow-sm">
               <span class="material-symbols-outlined text-[24px]">calendar_clock</span>
             </div>
-            <h3 class="text-lg font-bold text-on-surface">Rétroplanning IA des Partiels</h3>
-            <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">
+            <h3 class="text-lg font-bold text-white">Rétroplanning IA des Partiels</h3>
+            <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">
               Entrez vos dates d'examens : l'IA répartit automatiquement vos chapitres en séances équilibrées avec rattrapage dynamique.
             </p>
           </div>
           
-          <div class="bg-surface-container-low rounded-xl p-3.5 flex flex-col gap-2.5 my-4 border border-surface-container">
+          <div class="bg-slate-950 rounded-xl p-3.5 flex flex-col gap-2.5 my-4 border border-slate-800">
             <div class="flex items-center justify-between text-xs">
-              <span class="font-bold text-on-surface">Droit des Contrats / Partiels</span>
-              <span class="text-primary font-extrabold">Dans 12 jours</span>
+              <span class="font-bold text-white">Droit des Contrats / Partiels</span>
+              <span class="text-emerald-400 font-extrabold">Dans 12 jours</span>
             </div>
-            <div class="w-full bg-surface-container-highest rounded-full h-2.5 overflow-hidden">
-              <div class="bg-primary-container h-full rounded-full w-[78%]"></div>
+            <div class="w-full bg-slate-900 rounded-full h-2.5 overflow-hidden border border-slate-800">
+              <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full w-[78%]"></div>
             </div>
-            <div class="flex justify-between text-[11px] text-tertiary font-medium">
+            <div class="flex justify-between text-[11px] text-slate-400 font-medium">
               <span>22 / 28 chapitres validés</span>
-              <span class="text-primary font-bold">78% de maîtrise</span>
+              <span class="text-emerald-400 font-bold">78% de maîtrise</span>
             </div>
           </div>
 
-          <span class="text-xs text-primary font-bold flex items-center gap-1.5">
+          <span class="text-xs text-emerald-400 font-bold flex items-center gap-1.5">
             <span class="material-symbols-outlined text-[18px]">bolt</span> Réajustement instantané en cas d'imprévu
           </span>
         </div>
 
         <!-- Bento 4: Mode Quiz & Auto-évaluation (4 cols) -->
-        <div class="lg:col-span-4 bg-white rounded-3xl p-6 shadow-bento hover:shadow-bento-hover border border-surface-container flex flex-col justify-between transition-all">
+        <div class="lg:col-span-4 bg-dark-card rounded-3xl p-6 shadow-dark-bento hover:shadow-dark-bento-hover border border-slate-800 hover:border-slate-700 flex flex-col justify-between transition-all">
           <div>
-            <div class="w-11 h-11 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-800 mb-3 shadow-sm">
+            <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 flex items-center justify-center mb-3 shadow-sm">
               <span class="material-symbols-outlined text-[24px]">quiz</span>
             </div>
-            <h3 class="text-lg font-bold text-on-surface">Quiz & Auto-évaluation Active</h3>
-            <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">
+            <h3 class="text-lg font-bold text-white">Quiz & Auto-évaluation Active</h3>
+            <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">
               Générez des QCM d'entraînement à partir de n'importe quel cours avec explications détaillées pour chaque bonne ou mauvaise réponse.
             </p>
           </div>
 
-          <div class="bg-surface-container-low rounded-xl p-3.5 flex flex-col gap-2 my-4 border border-surface-container">
+          <div class="bg-slate-950 rounded-xl p-3.5 flex flex-col gap-2 my-4 border border-slate-800">
             <div class="flex items-center justify-between text-xs">
-              <span class="font-bold text-on-surface">Question piège IA #04</span>
-              <span class="text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded text-[10px]">Résolu</span>
+              <span class="font-bold text-white">Question piège IA #04</span>
+              <span class="text-emerald-300 font-bold bg-emerald-500/20 border border-emerald-500/30 px-2 py-0.5 rounded text-[10px]">Résolu</span>
             </div>
-            <p class="text-xs text-on-surface-variant font-medium">« Quelle molécule inhibe la pompe Na+/K+ ATPase ? »</p>
-            <span class="text-[11px] text-primary font-bold">✓ Ouabaïne / Digoxine (Correct)</span>
+            <p class="text-xs text-slate-300 font-medium">« Quelle molécule inhibe la pompe Na+/K+ ATPase ? »</p>
+            <span class="text-[11px] text-emerald-400 font-bold">✓ Ouabaïne / Digoxine (Correct)</span>
           </div>
 
-          <span class="text-xs text-tertiary font-semibold flex items-center gap-1.5">
-            <span class="material-symbols-outlined text-[16px] text-emerald-600">lock</span> Vos cours restent 100% privés et chiffrés
+          <span class="text-xs text-slate-400 font-semibold flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px] text-emerald-400">lock</span> Vos cours restent 100% privés et chiffrés
           </span>
         </div>
 
         <!-- Bento 5: Salons d'Étude Silencieux (4 cols) -->
-        <div class="lg:col-span-4 bg-white rounded-3xl p-6 shadow-bento hover:shadow-bento-hover border border-surface-container flex flex-col justify-between transition-all">
+        <div class="lg:col-span-4 bg-dark-card rounded-3xl p-6 shadow-dark-bento hover:shadow-dark-bento-hover border border-slate-800 hover:border-slate-700 flex flex-col justify-between transition-all">
           <div>
-            <div class="w-11 h-11 rounded-2xl bg-slate-100 flex items-center justify-center text-on-surface mb-3 shadow-sm">
+            <div class="w-11 h-11 rounded-2xl bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 flex items-center justify-center mb-3 shadow-sm">
               <span class="material-symbols-outlined text-[24px]">group</span>
             </div>
-            <h3 class="text-lg font-bold text-on-surface">Salons d'Étude Silencieux</h3>
-            <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">
+            <h3 class="text-lg font-bold text-white">Salons d'Étude Silencieux</h3>
+            <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">
               Rejoignez des salons de révision en visio silencieuse (Study With Me) pour vaincre la procrastination et rester concentré en groupe.
             </p>
           </div>
 
-          <div class="bg-surface-container-low rounded-xl p-3.5 flex items-center justify-between my-4 border border-surface-container">
+          <div class="bg-slate-950 rounded-xl p-3.5 flex items-center justify-between my-4 border border-slate-800">
             <div class="flex items-center gap-2.5">
               <span class="relative flex h-3 w-3">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-3 w-3 bg-primary-container"></span>
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
               </span>
-              <span class="text-xs font-bold text-on-surface">Salon “Bibliothèque Sorbonne”</span>
+              <span class="text-xs font-bold text-white">Salon “Bibliothèque Sorbonne”</span>
             </div>
-            <span class="text-[11px] font-bold text-primary bg-emerald-100 px-2.5 py-1 rounded-md">24 connectés</span>
+            <span class="text-[11px] font-bold text-emerald-300 bg-emerald-500/20 border border-emerald-500/30 px-2.5 py-1 rounded-md">24 connectés</span>
           </div>
 
-          <span class="text-xs text-primary font-bold flex items-center gap-1.5">
+          <span class="text-xs text-emerald-400 font-bold flex items-center gap-1.5">
             <span class="material-symbols-outlined text-[18px]">military_tech</span> Émulation positive et zéro distraction
           </span>
         </div>
@@ -841,45 +837,45 @@
 
     <!-- ======================= 5. SECTION "POURQUOI EST-CE 100% GRATUIT ?" ======================= -->
     <section id="pourquoi-gratuit" class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
-      <div class="relative bg-gradient-to-br from-[#003824] via-[#005a3c] to-[#0b1c30] rounded-3xl p-8 sm:p-12 lg:p-16 text-white overflow-hidden shadow-2xl border border-emerald-500/30">
+      <div class="relative bg-gradient-to-br from-slate-950 via-dark-card to-emerald-950/80 rounded-3xl p-8 sm:p-12 lg:p-16 text-white overflow-hidden shadow-2xl border border-emerald-500/30">
         
         <!-- Ambient Decors -->
-        <div class="absolute -top-16 -right-16 w-80 h-80 bg-primary-container/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-16 -left-16 w-80 h-80 bg-secondary-container/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -top-16 -right-16 w-80 h-80 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-16 -left-16 w-80 h-80 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
         <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           <!-- Text Explanation (7 cols) -->
           <div class="lg:col-span-7 flex flex-col gap-5">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-secondary-container text-xs font-extrabold uppercase tracking-wider w-fit">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-extrabold uppercase tracking-wider w-fit">
               <span class="material-symbols-outlined text-[16px]">favorite</span>
               Notre Mission Éducative
             </div>
 
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Pourquoi RevizFlow est <span class="text-secondary-container underline decoration-emerald-400 decoration-wavy">100% gratuit</span> pour tous les étudiants ?
+              Pourquoi RevizFlow est <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 underline decoration-emerald-500 decoration-wavy">100% gratuit</span> pour tous les étudiants ?
             </h2>
 
-            <p class="text-sm sm:text-base text-emerald-100/90 leading-relaxed">
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
               Nous pensons qu'aucun étudiant ne devrait rater ses examens ou concours pour des raisons de coût d'outils numériques. Là où d'autres plateformes facturent entre 10€ et 30€ par mois, RevizFlow offre <strong>l'intégralité de ses fonctionnalités sans aucun frais</strong>.
             </p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">
-                <span class="material-symbols-outlined text-[24px] text-secondary-container mb-1">credit_card_off</span>
+              <div class="bg-slate-900/80 backdrop-blur-md p-4 rounded-2xl border border-slate-800">
+                <span class="material-symbols-outlined text-[24px] text-emerald-400 mb-1">credit_card_off</span>
                 <h4 class="text-sm font-bold text-white">0€ / mois à vie</h4>
-                <p class="text-xs text-emerald-200 mt-1">Aucune carte bancaire requise, aucun renouvellement caché.</p>
+                <p class="text-xs text-slate-400 mt-1">Aucune carte bancaire requise, aucun renouvellement caché.</p>
               </div>
 
-              <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">
-                <span class="material-symbols-outlined text-[24px] text-secondary-container mb-1">all_inclusive</span>
+              <div class="bg-slate-900/80 backdrop-blur-md p-4 rounded-2xl border border-slate-800">
+                <span class="material-symbols-outlined text-[24px] text-emerald-400 mb-1">all_inclusive</span>
                 <h4 class="text-sm font-bold text-white">Tout est illimité</h4>
-                <p class="text-xs text-emerald-200 mt-1">Flashcards, résumés IA, Pomodoro et salons sans aucun bridage.</p>
+                <p class="text-xs text-slate-400 mt-1">Flashcards, résumés IA, Pomodoro et salons sans aucun bridage.</p>
               </div>
             </div>
 
             <div class="pt-2">
-              <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-secondary-container hover:bg-white text-on-secondary-container font-extrabold text-sm sm:text-base rounded-full shadow-lg transition-all">
+              <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-sm sm:text-base rounded-full shadow-[0_0_25px_rgba(16,185,129,0.35)] transition-all">
                 <span>Créer mon espace gratuit</span>
                 <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
               </a>
@@ -887,48 +883,48 @@
           </div>
 
           <!-- Comparison Table (5 cols) -->
-          <div class="lg:col-span-5 bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/15 shadow-2xl">
+          <div class="lg:col-span-5 bg-slate-900/90 backdrop-blur-xl rounded-2xl p-6 border border-slate-800 shadow-2xl">
             <h3 class="text-base font-extrabold text-white mb-4 flex items-center justify-between">
               <span>Comparatif des outils d'étude</span>
-              <span class="text-xs text-emerald-300 font-semibold">2026</span>
+              <span class="text-xs text-emerald-400 font-semibold">2026</span>
             </h3>
 
-            <div class="flex flex-col divide-y divide-white/10 text-xs">
+            <div class="flex flex-col divide-y divide-slate-800 text-xs">
               
               <!-- RevizFlow -->
-              <div class="py-3 flex items-center justify-between font-bold bg-white/10 px-3 rounded-xl border border-emerald-400/30">
+              <div class="py-3 flex items-center justify-between font-bold bg-emerald-950/40 px-3 rounded-xl border border-emerald-500/40">
                 <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[18px] text-secondary-container">check_circle</span>
+                  <span class="material-symbols-outlined text-[18px] text-emerald-400">check_circle</span>
                   <span class="text-white">RevizFlow</span>
                 </div>
-                <span class="text-secondary-container font-extrabold text-sm">0€ (100% Gratuit)</span>
+                <span class="text-emerald-400 font-extrabold text-sm">0€ (100% Gratuit)</span>
               </div>
 
               <!-- Other apps -->
-              <div class="py-3 flex items-center justify-between text-slate-300 px-3">
+              <div class="py-3 flex items-center justify-between text-slate-400 px-3">
                 <span>Quizlet Plus</span>
-                <span class="font-mono text-red-300 line-through">35,99 € / an</span>
+                <span class="font-mono text-rose-400 line-through">35,99 € / an</span>
               </div>
 
-              <div class="py-3 flex items-center justify-between text-slate-300 px-3">
+              <div class="py-3 flex items-center justify-between text-slate-400 px-3">
                 <span>Anki Pro Mobile</span>
-                <span class="font-mono text-red-300 line-through">29,99 € achat unique</span>
+                <span class="font-mono text-rose-400 line-through">29,99 € achat unique</span>
               </div>
 
-              <div class="py-3 flex items-center justify-between text-slate-300 px-3">
+              <div class="py-3 flex items-center justify-between text-slate-400 px-3">
                 <span>RemNote Pro</span>
-                <span class="font-mono text-red-300 line-through">10,00 € / mois</span>
+                <span class="font-mono text-rose-400 line-through">10,00 € / mois</span>
               </div>
 
-              <div class="py-3 flex items-center justify-between text-slate-300 px-3">
+              <div class="py-3 flex items-center justify-between text-slate-400 px-3">
                 <span>StudySmarter Premium</span>
-                <span class="font-mono text-red-300 line-through">9,99 € / mois</span>
+                <span class="font-mono text-rose-400 line-through">9,99 € / mois</span>
               </div>
 
             </div>
 
-            <div class="mt-4 pt-3 border-t border-white/10 text-center">
-              <span class="text-[11px] text-emerald-200 font-semibold">
+            <div class="mt-4 pt-3 border-t border-slate-800 text-center">
+              <span class="text-[11px] text-emerald-300 font-semibold">
                 🎉 Économisez jusqu'à 150€ par an tout en révisant mieux
               </span>
             </div>
@@ -939,30 +935,30 @@
     </section>
 
     <!-- ======================= 6. STATS & PRODUCTIVITY IMPACT ======================= -->
-    <section class="w-full bg-white py-16 border-y border-surface-container shadow-sm">
+    <section class="w-full bg-dark-surface/80 py-16 border-y border-slate-800 shadow-sm">
       <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-surface-container">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-slate-800">
           
           <div class="flex flex-col items-center pt-4 md:pt-0 md:px-4">
-            <span class="text-5xl lg:text-6xl font-extrabold text-primary tracking-tight">+42%</span>
-            <span class="text-lg font-bold text-on-surface mt-2">D'amélioration aux examens</span>
-            <p class="text-xs sm:text-sm text-on-surface-variant mt-1.5 max-w-xs leading-relaxed">
+            <span class="text-5xl lg:text-6xl font-extrabold text-emerald-400 tracking-tight">+42%</span>
+            <span class="text-lg font-bold text-white mt-2">D'amélioration aux examens</span>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1.5 max-w-xs leading-relaxed">
               Constaté auprès des étudiants révisant régulièrement avec nos cycles de répétition espacée SM-2.
             </p>
           </div>
 
           <div class="flex flex-col items-center pt-4 md:pt-0 md:px-4">
-            <span class="text-5xl lg:text-6xl font-extrabold text-primary-container tracking-tight">3.5x</span>
-            <span class="text-lg font-bold text-on-surface mt-2">Moins de procrastination</span>
-            <p class="text-xs sm:text-sm text-on-surface-variant mt-1.5 max-w-xs leading-relaxed">
+            <span class="text-5xl lg:text-6xl font-extrabold text-teal-400 tracking-tight">3.5x</span>
+            <span class="text-lg font-bold text-white mt-2">Moins de procrastination</span>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1.5 max-w-xs leading-relaxed">
               Grâce au découpage automatisé des séances et à l'immersion sonore anti-distraction.
             </p>
           </div>
 
           <div class="flex flex-col items-center pt-4 md:pt-0 md:px-4">
-            <span class="text-5xl lg:text-6xl font-extrabold text-emerald-800 tracking-tight">1.2M+</span>
-            <span class="text-lg font-bold text-on-surface mt-2">Flashcards révisées</span>
-            <p class="text-xs sm:text-sm text-on-surface-variant mt-1.5 max-w-xs leading-relaxed">
+            <span class="text-5xl lg:text-6xl font-extrabold text-cyan-400 tracking-tight">1.2M+</span>
+            <span class="text-lg font-bold text-white mt-2">Flashcards révisées</span>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1.5 max-w-xs leading-relaxed">
               Consolidées dans la mémoire à long terme par notre communauté académique active.
             </p>
           </div>
@@ -972,18 +968,18 @@
     </section>
 
     <!-- ======================= 7. TESTIMONIALS / WALL OF LOVE ======================= -->
-    <section id="temoignages" class="w-full bg-surface-container-low/40 py-20 border-b border-surface-container">
+    <section id="temoignages" class="w-full bg-dark-base py-20 border-b border-slate-800">
       <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="flex flex-col items-center text-center max-w-2xl mx-auto mb-14">
-          <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-secondary-container/60 text-on-secondary-container text-xs uppercase tracking-wider font-extrabold mb-3">
+          <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-950 border border-emerald-500/30 text-emerald-400 text-xs uppercase tracking-wider font-extrabold mb-3">
             <span class="material-symbols-outlined text-[16px]">reviews</span>
             Retours d'Expérience
           </div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-on-surface tracking-tight">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Ils ont transformé leurs résultats scolaires
           </h2>
-          <p class="text-sm text-on-surface-variant mt-2">
+          <p class="text-sm text-slate-400 mt-2">
             Découvrez comment RevizFlow libère les étudiants de l'angoisse des partiels et des concours.
           </p>
         </div>
@@ -991,70 +987,70 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           
           <!-- Testimonial 1: PASS / Médecine -->
-          <div class="bg-white p-6 rounded-2xl border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+          <div class="bg-dark-card p-6 rounded-2xl border border-slate-800 hover:border-emerald-500/40 shadow-sm hover:shadow-dark-bento transition-all flex flex-col justify-between">
             <div class="flex flex-col gap-3">
-              <div class="flex items-center gap-1 text-amber-500">
+              <div class="flex items-center gap-1 text-amber-400">
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
               </div>
-              <p class="text-sm text-on-surface italic leading-relaxed">
+              <p class="text-sm text-slate-300 italic leading-relaxed">
                 « En PASS Médecine, la masse de cours est colossale. Le fait que RevizFlow génère instantanément des flashcards précises depuis mes diaporamas et gère les intervalles J+1, J+3, J+7 m'a permis de passer primante sans craquer ! »
               </p>
             </div>
-            <div class="flex items-center gap-3 pt-4 mt-4 border-t border-surface-container">
-              <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center font-bold text-primary text-xs">CM</div>
+            <div class="flex items-center gap-3 pt-4 mt-4 border-t border-slate-800">
+              <div class="w-10 h-10 rounded-full bg-emerald-950 border border-emerald-500/30 flex items-center justify-center font-bold text-emerald-400 text-xs">CM</div>
               <div>
-                <h4 class="text-xs font-bold text-on-surface">Camille Moreau</h4>
-                <p class="text-[11px] text-tertiary">Médecine (PASS) • Sorbonne Université</p>
+                <h4 class="text-xs font-bold text-white">Camille Moreau</h4>
+                <p class="text-[11px] text-slate-400">Médecine (PASS) • Sorbonne Université</p>
               </div>
             </div>
           </div>
 
           <!-- Testimonial 2: CPGE / Prépa -->
-          <div class="bg-white p-6 rounded-2xl border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+          <div class="bg-dark-card p-6 rounded-2xl border border-slate-800 hover:border-emerald-500/40 shadow-sm hover:shadow-dark-bento transition-all flex flex-col justify-between">
             <div class="flex flex-col gap-3">
-              <div class="flex items-center gap-1 text-amber-500">
+              <div class="flex items-center gap-1 text-amber-400">
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
               </div>
-              <p class="text-sm text-on-surface italic leading-relaxed">
+              <p class="text-sm text-slate-300 italic leading-relaxed">
                 « Les ambiances sonores avec ondes 40Hz combinées au timer Pomodoro me plongent dans un tunnel de concentration en 2 minutes. Et le fait que ce soit 100% gratuit change tout par rapport aux applis payantes pleines de pubs. »
               </p>
             </div>
-            <div class="flex items-center gap-3 pt-4 mt-4 border-t border-surface-container">
-              <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center font-bold text-teal-900 text-xs">TD</div>
+            <div class="flex items-center gap-3 pt-4 mt-4 border-t border-slate-800">
+              <div class="w-10 h-10 rounded-full bg-teal-950 border border-teal-500/30 flex items-center justify-center font-bold text-teal-300 text-xs">TD</div>
               <div>
-                <h4 class="text-xs font-bold text-on-surface">Théo Delmas</h4>
-                <p class="text-[11px] text-tertiary">CPGE MPSI / MP • Lycée Saint-Louis</p>
+                <h4 class="text-xs font-bold text-white">Théo Delmas</h4>
+                <p class="text-[11px] text-slate-400">CPGE MPSI / MP • Lycée Saint-Louis</p>
               </div>
             </div>
           </div>
 
           <!-- Testimonial 3: Droit / CRFPA -->
-          <div class="bg-white p-6 rounded-2xl border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+          <div class="bg-dark-card p-6 rounded-2xl border border-slate-800 hover:border-emerald-500/40 shadow-sm hover:shadow-dark-bento transition-all flex flex-col justify-between">
             <div class="flex flex-col gap-3">
-              <div class="flex items-center gap-1 text-amber-500">
+              <div class="flex items-center gap-1 text-amber-400">
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
               </div>
-              <p class="text-sm text-on-surface italic leading-relaxed">
+              <p class="text-sm text-slate-300 italic leading-relaxed">
                 « L'importation de nos gros polycopiés de jurisprudence avec extraction automatique des arrêts clés et dates d'examen est bluffante. C'est l'outil indispensable pour préparer le CRFPA sereinement. »
               </p>
             </div>
-            <div class="flex items-center gap-3 pt-4 mt-4 border-t border-surface-container">
-              <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-800 text-xs">IB</div>
+            <div class="flex items-center gap-3 pt-4 mt-4 border-t border-slate-800">
+              <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-slate-300 text-xs">IB</div>
               <div>
-                <h4 class="text-xs font-bold text-on-surface">Inès Benali</h4>
-                <p class="text-[11px] text-tertiary">Master 2 Droit des Affaires • Paris-Panthéon-Assas</p>
+                <h4 class="text-xs font-bold text-white">Inès Benali</h4>
+                <p class="text-[11px] text-slate-400">Master 2 Droit des Affaires • Paris-Panthéon-Assas</p>
               </div>
             </div>
           </div>
@@ -1066,11 +1062,11 @@
     <!-- ======================= 8. FAQ ACCORDION ======================= -->
     <section id="faq" class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
       <div class="flex flex-col items-center text-center mb-12">
-        <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-surface-container text-on-surface text-xs uppercase tracking-wider font-extrabold mb-3">
+        <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-slate-300 text-xs uppercase tracking-wider font-extrabold mb-3">
           <span class="material-symbols-outlined text-[16px]">help_outline</span>
           Questions Fréquentes
         </div>
-        <h2 class="text-3xl font-extrabold text-on-surface tracking-tight">
+        <h2 class="text-3xl font-extrabold text-white tracking-tight">
           Tout ce que vous devez savoir sur RevizFlow
         </h2>
       </div>
@@ -1078,48 +1074,48 @@
       <div class="flex flex-col gap-4">
         
         <!-- FAQ 1: Free Access -->
-        <div class="bg-white rounded-2xl border border-surface-container overflow-hidden shadow-sm">
-          <button onclick="toggleFaq('faq-1')" class="w-full text-left p-5 flex items-center justify-between font-bold text-sm text-on-surface hover:bg-emerald-50/40 transition-colors">
+        <div class="bg-dark-card rounded-2xl border border-slate-800 overflow-hidden shadow-sm">
+          <button onclick="toggleFaq('faq-1')" class="w-full text-left p-5 flex items-center justify-between font-bold text-sm text-white hover:bg-slate-850 transition-colors">
             <span class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-[20px] text-primary">redeem</span>
+              <span class="material-symbols-outlined text-[20px] text-emerald-400">redeem</span>
               RevizFlow est-il vraiment 100% gratuit sans frais cachés ?
             </span>
-            <span id="faq-1-icon" class="material-symbols-outlined text-[20px] text-primary transition-transform">expand_more</span>
+            <span id="faq-1-icon" class="material-symbols-outlined text-[20px] text-emerald-400 transition-transform">expand_more</span>
           </button>
-          <div id="faq-1" class="hidden p-5 pt-0 text-xs sm:text-sm text-on-surface-variant leading-relaxed border-t border-surface-container/60">
+          <div id="faq-1" class="hidden p-5 pt-0 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800">
             Oui, absolument. Toutes les fonctionnalités (génération IA de fiches et quiz, flashcards illimitées avec répétition espacée SM-2, minuteur Pomodoro adaptatif avec ondes 40Hz, rétroplanning et salons silencieux) sont 100% gratuites et accessibles à vie sans abonnement ni carte bancaire.
           </div>
         </div>
 
         <!-- FAQ 2: SM-2 Spaced Repetition -->
-        <div class="bg-white rounded-2xl border border-surface-container overflow-hidden shadow-sm">
-          <button onclick="toggleFaq('faq-2')" class="w-full text-left p-5 flex items-center justify-between font-bold text-sm text-on-surface hover:bg-emerald-50/40 transition-colors">
+        <div class="bg-dark-card rounded-2xl border border-slate-800 overflow-hidden shadow-sm">
+          <button onclick="toggleFaq('faq-2')" class="w-full text-left p-5 flex items-center justify-between font-bold text-sm text-white hover:bg-slate-850 transition-colors">
             <span>Comment fonctionne l'algorithme de répétition espacée (SRS SM-2) ?</span>
-            <span id="faq-2-icon" class="material-symbols-outlined text-[20px] text-primary transition-transform">expand_more</span>
+            <span id="faq-2-icon" class="material-symbols-outlined text-[20px] text-emerald-400 transition-transform">expand_more</span>
           </button>
-          <div id="faq-2" class="hidden p-5 pt-0 text-xs sm:text-sm text-on-surface-variant leading-relaxed border-t border-surface-container/60">
+          <div id="faq-2" class="hidden p-5 pt-0 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800">
             L'algorithme SM-2 calcule mathématiquement la vitesse d'oubli de chaque notion selon la loi d'Ebbinghaus. En espaçant les révisions (J+1, J+4, J+10, J+25), votre cerveau ancre l'information directement dans la mémoire à long terme sans fatigue inutile.
           </div>
         </div>
 
         <!-- FAQ 3: Privacy & Data -->
-        <div class="bg-white rounded-2xl border border-surface-container overflow-hidden shadow-sm">
-          <button onclick="toggleFaq('faq-3')" class="w-full text-left p-5 flex items-center justify-between font-bold text-sm text-on-surface hover:bg-emerald-50/40 transition-colors">
+        <div class="bg-dark-card rounded-2xl border border-slate-800 overflow-hidden shadow-sm">
+          <button onclick="toggleFaq('faq-3')" class="w-full text-left p-5 flex items-center justify-between font-bold text-sm text-white hover:bg-slate-850 transition-colors">
             <span>Mes cours et fiches restent-ils privés et confidentiels ?</span>
-            <span id="faq-3-icon" class="material-symbols-outlined text-[20px] text-primary transition-transform">expand_more</span>
+            <span id="faq-3-icon" class="material-symbols-outlined text-[20px] text-emerald-400 transition-transform">expand_more</span>
           </button>
-          <div id="faq-3" class="hidden p-5 pt-0 text-xs sm:text-sm text-on-surface-variant leading-relaxed border-t border-surface-container/60">
+          <div id="faq-2" class="hidden p-5 pt-0 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800">
             Oui. Vos fichiers PDF, Word et notes sont chiffrés. Nous n'utilisons jamais vos documents personnels pour entraîner des modèles publics d'intelligence artificielle.
           </div>
         </div>
 
         <!-- FAQ 4: Anki & Quizlet import -->
-        <div class="bg-white rounded-2xl border border-surface-container overflow-hidden shadow-sm">
-          <button onclick="toggleFaq('faq-4')" class="w-full text-left p-5 flex items-center justify-between font-bold text-sm text-on-surface hover:bg-emerald-50/40 transition-colors">
+        <div class="bg-dark-card rounded-2xl border border-slate-800 overflow-hidden shadow-sm">
+          <button onclick="toggleFaq('faq-4')" class="w-full text-left p-5 flex items-center justify-between font-bold text-sm text-white hover:bg-slate-850 transition-colors">
             <span>Puis-je importer mes jeux de cartes Anki ou Quizlet existants ?</span>
-            <span id="faq-4-icon" class="material-symbols-outlined text-[20px] text-primary transition-transform">expand_more</span>
+            <span id="faq-4-icon" class="material-symbols-outlined text-[20px] text-emerald-400 transition-transform">expand_more</span>
           </button>
-          <div id="faq-4" class="hidden p-5 pt-0 text-xs sm:text-sm text-on-surface-variant leading-relaxed border-t border-surface-container/60">
+          <div id="faq-4" class="hidden p-5 pt-0 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800">
             Oui, RevizFlow intègre un convertisseur universel compatible avec les exports .apkg (Anki) et les fichiers CSV Quizlet / Notion.
           </div>
         </div>
@@ -1129,31 +1125,31 @@
 
     <!-- ======================= 9. BOTTOM CTA BANNER ======================= -->
     <section class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
-      <div class="relative bg-gradient-to-br from-primary via-secondary to-[#00422b] rounded-3xl p-8 lg:p-16 text-white overflow-hidden shadow-2xl">
+      <div class="relative bg-gradient-to-br from-slate-900 via-dark-card to-emerald-950 rounded-3xl p-8 lg:p-16 text-white overflow-hidden shadow-2xl border border-emerald-500/30">
         
-        <div class="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary-container/20 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/15 rounded-full blur-2xl pointer-events-none"></div>
         
         <div class="relative z-10 max-w-2xl mx-auto text-center flex flex-col items-center gap-5">
-          <span class="px-4 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs uppercase font-extrabold tracking-wider">
+          <span class="px-4 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs uppercase font-extrabold tracking-wider">
             Accès Libre & Immédiat
           </span>
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Prêt à transformer votre façon d'apprendre ?
           </h2>
-          <p class="text-sm sm:text-base text-emerald-100 max-w-xl leading-relaxed">
+          <p class="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed">
             Rejoignez dès maintenant les +25 000 étudiants qui révisent plus efficacement sans jamais payer le moindre abonnement.
           </p>
 
           <!-- Direct App Link -->
           <div class="pt-2 flex flex-col sm:flex-row items-center gap-3">
-            <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white hover:bg-emerald-50 text-emerald-950 font-extrabold text-sm sm:text-base rounded-full shadow-xl hover:scale-105 transition-all">
+            <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-sm sm:text-base rounded-full shadow-[0_0_30px_rgba(16,185,129,0.4)] hover:scale-105 transition-all">
               <span>Lancer RevizFlow gratuitement</span>
-              <span class="material-symbols-outlined text-[20px] text-primary">rocket_launch</span>
+              <span class="material-symbols-outlined text-[20px] text-slate-950">rocket_launch</span>
             </a>
           </div>
 
-          <p class="text-xs text-emerald-200/80 font-medium">
+          <p class="text-xs text-slate-400 font-medium">
             100% Gratuit • Sans carte bancaire • Synchronisé sur ordinateur, tablette et téléphone
           </p>
         </div>
@@ -1163,23 +1159,23 @@
   </main>
 
   <!-- ======================= FOOTER ======================= -->
-  <footer class="w-full bg-white border-t border-surface-container mt-12 shadow-sm">
+  <footer class="w-full bg-slate-950 border-t border-slate-800 mt-12 shadow-sm">
     <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         
         <!-- Col 1 & 2: Brand Info -->
         <div class="lg:col-span-2 flex flex-col gap-4 pr-0 lg:pr-8">
           <div class="flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-primary to-primary-container flex items-center justify-center text-white shadow-sm">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-slate-950 shadow-sm">
               <span class="material-symbols-outlined text-[18px]">cyclone</span>
             </div>
-            <span class="text-xl font-bold tracking-tight text-on-surface">RevizFlow</span>
+            <span class="text-xl font-bold tracking-tight text-white">RevizFlow</span>
           </div>
-          <p class="text-xs text-on-surface-variant max-w-sm leading-relaxed">
+          <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
             L'espace de travail d'étude intelligent et 100% gratuit pour réviser méthodiquement, mémoriser durablement et libérer votre potentiel académique sans anxiété.
           </p>
           <div class="flex items-center gap-2 mt-1">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/60 text-[11px] font-bold text-on-secondary-container">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950 border border-emerald-500/30 text-[11px] font-bold text-emerald-300">
               <span class="material-symbols-outlined text-[14px]">volunteer_activism</span> Projet 100% Gratuit & Étudiant
             </span>
           </div>
@@ -1187,45 +1183,45 @@
 
         <!-- Col 3: Outils -->
         <div class="flex flex-col gap-3">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-on-surface">Outils Gratuits</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200">Outils Gratuits</h4>
           <div class="flex flex-col gap-2">
-            <a href="#demo-ia" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Générateur de Cours IA</a>
-            <a href="#demo-flashcards" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Flashcards SRS SM-2</a>
-            <a href="#demo-pomodoro" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Minuteur Pomodoro Flow</a>
-            <a href="#outils" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Rétroplanning des Partiels</a>
+            <a href="#demo-ia" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">Générateur de Cours IA</a>
+            <a href="#demo-flashcards" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">Flashcards SRS SM-2</a>
+            <a href="#demo-pomodoro" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">Minuteur Pomodoro Flow</a>
+            <a href="#outils" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">Rétroplanning des Partiels</a>
           </div>
         </div>
 
         <!-- Col 4: Ressources -->
         <div class="flex flex-col gap-3">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-on-surface">Ressources</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200">Ressources</h4>
           <div class="flex flex-col gap-2">
-            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Guide des Sciences Cognitives</a>
-            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Modèles de Fiches Prépa & PASS</a>
-            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Méthode de la Répétition Espacée</a>
-            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Calculateur de Rétention</a>
+            <a href="#" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">Guide des Sciences Cognitives</a>
+            <a href="#" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">Modèles de Fiches Prépa & PASS</a>
+            <a href="#" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">Méthode de la Répétition Espacée</a>
+            <a href="#" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">Calculateur de Rétention</a>
           </div>
         </div>
 
         <!-- Col 5: Communauté -->
         <div class="flex flex-col gap-3">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-on-surface">Communauté</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200">Communauté</h4>
           <div class="flex flex-col gap-2">
-            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Discord Étudiant (25k membres)</a>
-            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Salons d'Étude Virtuels</a>
-            <a href="#" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Programme Ambassadeurs</a>
-            <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="text-xs text-primary font-bold hover:underline">Accéder à l'application</a>
+            <a href="#" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">Discord Étudiant (25k membres)</a>
+            <a href="#" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">Salons d'Étude Virtuels</a>
+            <a href="#" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">Programme Ambassadeurs</a>
+            <a href="https://revizflow.ai.studio" target="_blank" rel="noopener noreferrer" class="text-xs text-emerald-400 font-bold hover:underline">Accéder à l'application</a>
           </div>
         </div>
 
       </div>
 
-      <div class="mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-surface-container-low/60 rounded-2xl px-6 py-4 border border-surface-container">
-        <p class="text-xs text-on-surface-variant">© 2026 RevizFlow. Plateforme libre et gratuite pour tous les étudiants.</p>
+      <div class="mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-900/60 rounded-2xl px-6 py-4 border border-slate-800">
+        <p class="text-xs text-slate-500">© 2026 RevizFlow. Plateforme libre et gratuite pour tous les étudiants.</p>
         <div class="flex items-center gap-6">
-          <a href="#" class="text-xs text-on-surface-variant hover:text-on-surface transition-colors">Confidentialité</a>
-          <a href="#" class="text-xs text-on-surface-variant hover:text-on-surface transition-colors">Conditions d'Utilisation</a>
-          <a href="#" class="text-xs text-on-surface-variant hover:text-on-surface transition-colors">Mentions Légales</a>
+          <a href="#" class="text-xs text-slate-500 hover:text-slate-300 transition-colors">Confidentialité</a>
+          <a href="#" class="text-xs text-slate-500 hover:text-slate-300 transition-colors">Conditions d'Utilisation</a>
+          <a href="#" class="text-xs text-slate-500 hover:text-slate-300 transition-colors">Mentions Légales</a>
         </div>
       </div>
     </div>
@@ -1277,13 +1273,13 @@
       ['medecine', 'droit', 'prepa'].forEach(key => {
         const btn = document.getElementById(`preset-${key}`);
         if (key === presetKey) {
-          btn.className = "text-left p-3.5 rounded-2xl border-2 border-primary bg-emerald-50/70 hover:bg-emerald-50 transition-all flex items-center justify-between group";
+          btn.className = "text-left p-3.5 rounded-2xl border-2 border-emerald-500 bg-emerald-950/40 hover:bg-emerald-950/60 transition-all flex items-center justify-between group";
           btn.querySelector('.material-symbols-outlined:last-child').innerText = 'check_circle';
-          btn.querySelector('.material-symbols-outlined:last-child').className = 'material-symbols-outlined text-[20px] text-primary';
+          btn.querySelector('.material-symbols-outlined:last-child').className = 'material-symbols-outlined text-[20px] text-emerald-400';
         } else {
-          btn.className = "text-left p-3.5 rounded-2xl border border-surface-container bg-surface-container-low hover:bg-emerald-50/50 transition-all flex items-center justify-between group";
+          btn.className = "text-left p-3.5 rounded-2xl border border-slate-800 bg-slate-900/80 hover:bg-slate-800 transition-all flex items-center justify-between group";
           btn.querySelector('.material-symbols-outlined:last-child').innerText = 'arrow_forward';
-          btn.querySelector('.material-symbols-outlined:last-child').className = 'material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary';
+          btn.querySelector('.material-symbols-outlined:last-child').className = 'material-symbols-outlined text-[20px] text-slate-500 group-hover:text-emerald-400';
         }
       });
       simulateAiGeneration();
@@ -1299,7 +1295,7 @@
 
       btn.disabled = true;
       btn.innerHTML = `<span class="material-symbols-outlined text-[20px] animate-spin">sync</span><span>Génération IA en cours...</span>`;
-      indicator.className = "w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping";
+      indicator.className = "w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping";
       statusText.innerText = "Analyse sémantique et vectorisation du cours...";
 
       setTimeout(() => {
@@ -1308,17 +1304,17 @@
         summaryText.innerHTML = data.summaryText;
 
         cardsList.innerHTML = data.cards.map(c => `
-          <div class="p-2.5 rounded-lg bg-surface-container-low border border-surface-container text-xs">
-            <span class="text-[10px] text-tertiary block font-bold">Recto</span>
-            <p class="font-bold text-on-surface mt-0.5">${c.q}</p>
+          <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-xs">
+            <span class="text-[10px] text-slate-500 block font-bold">Recto</span>
+            <p class="font-bold text-slate-200 mt-0.5">${c.q}</p>
           </div>
-          <div class="p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-200 text-xs">
-            <span class="text-[10px] text-primary block font-bold">Verso (Réponse IA)</span>
-            <p class="font-semibold text-emerald-950 mt-0.5">${c.a}</p>
+          <div class="p-2.5 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-xs">
+            <span class="text-[10px] text-emerald-400 block font-bold">Verso (Réponse IA)</span>
+            <p class="font-semibold text-emerald-200 mt-0.5">${c.a}</p>
           </div>
         `).join('');
 
-        indicator.className = "w-2.5 h-2.5 rounded-full bg-emerald-500";
+        indicator.className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
         statusText.innerText = "Synthèse IA générée avec succès !";
         btn.disabled = false;
         btn.innerHTML = `<span class="material-symbols-outlined text-[20px]">auto_awesome</span><span>Générer Fiche & Flashcards IA</span>`;
